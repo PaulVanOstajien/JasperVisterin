@@ -1,0 +1,1087 @@
+%8.1a
+clear all
+
+syms f1(x,y)
+f1(x,y)=x^4-y^4
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.1b
+clear all
+
+syms f1(x,y)
+f1(x,y)=x^2*y
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+hold off 
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+levels= linspace(-5, 5, 15)
+fcontour(f1, [a, b, c, d], 'LevelList', levels)
+fcontour(f1, [a, b, c, d], 'LevelList', [subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)}), ...
+    subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)})], 'LineColor', 'r')
+scatter(kritisch.x, kritisch.y, 'fill', 'MarkerFaceColor', 'k')
+colorbar
+hold off
+fsurf(f1(x,y), [-1, 1, -1, 1])
+%x=0 zal MAX zijn als y>0 en MIN als y<0 
+
+%8.1c
+clear all
+
+syms f1(x,y)
+f1(x,y)=x*(x^2-y^2)
+
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+hold off 
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+levels= linspace(-5, 5, 15)
+fcontour(f1, [a, b, c, d], 'LevelList', levels)
+fcontour(f1, [a, b, c, d], 'LevelList', [subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)}), ...
+    subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)})], 'LineColor', 'r')
+scatter(kritisch.x, kritisch.y, 'fill', 'MarkerFaceColor', 'k')
+colorbar
+hold off
+fsurf(f1(x,y), [-1, 1, -1, 1])
+
+%8.1d
+clear all
+
+syms f1(x,y)
+f1(x,y)=y^2
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.1e
+clear all
+
+syms f1(x,y)
+f1(x,y)=y*(y-x^2)
+
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+fsurf(f1(x,y), [-1, 1, -1, 1])
+hold off 
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+levels= linspace(-5, 5, 15)
+fcontour(f1, [a, b, c, d], 'LevelList', levels)
+fcontour(f1, [a, b, c, d], 'LevelList', [subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)}), ...
+    subs(f1, {x, y}, {kritisch.x(1), kritisch.y(1)})], 'LineColor', 'r')
+scatter(kritisch.x, kritisch.y, 'fill', 'MarkerFaceColor', 'k')
+colorbar
+hold off
+
+%8.1f
+clear all
+
+syms f1(x,y)
+f1(x,y)=x^4+y^2
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.2
+clear all
+
+syms x y
+f(x,y) = x^2 + y^2
+g(x,y) = 3*x+2*y - 6
+We lossen y op uit   :
+solve(g(x,y) == 0, y)
+f1(x)=solve(g(x,y) == 0, y)
+We substitueren dit in  :
+w = subs(f(x,y), y, ans)
+We berekenen de kritische punten van . Om enkel reële oplossingen te krijgen, voegen we het naam-waardepaar 'Real', true toe.
+kritisch = solve(diff(w,x), x, 'Real', true)
+We zien dat de twee oplossingspunten op afstand  van de oorsprong gelegen zijn:
+sqrt(subs(w, x, kritisch(1)))
+We tekenen enkele niveaulijnen van , samen met de kritische punten en de beperking :
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+fcontour(f(x,y), [a, b, c, d], 'LevelList', [subs(w, x, kritisch(1))], 'LineColor', 'r')
+fcontour(g(x,y), [a, b, c, d], 'LevelList', [0], 'LineColor', 'g')
+scatter(kritisch(1),f1(kritisch(1)), 'fill', 'MarkerFaceColor', 'b')
+functie_waardez=f(kritisch(1),f1(kritisch(1)))
+
+hold off
+axis equal
+
+%8.3
+clear all
+
+syms x y
+f(x,y) = 3*x+2*y
+g(x,y) = x^2+y^2-1
+We lossen y op uit   :
+solve(g(x,y) == 0, y)
+We substitueren dit in  :
+w = expand(subs(f(x,y), y, ans))
+
+We berekenen de kritische punten van . Om enkel reële oplossingen te krijgen, voegen we het naam-waardepaar 'Real', true toe.
+kritisch = solve(diff(w,x), x, 'Real', true)
+We zien dat de twee oplossingspunten op afstand  van de oorsprong gelegen zijn:
+sqrt(subs(w, x, kritisch(1)))
+sqrt(subs(w, x, kritisch(2)))
+We tekenen enkele niveaulijnen van , samen met de kritische punten en de beperking :
+
+%substitutie gaat niet
+
+clear all
+
+syms x y
+f(x,y) = 3*x+2*y
+g(x,y) = x^2+y^2-1
+We zoeken de kritische punten van  :
+syms lambda
+W = f(x,y) - lambda * g(x,y)
+We zoeken de kritische punten van W door de partiële afgeleiden nul te stellen en deze vergelijkingen op te lossen naar x, y en λ:
+gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW, 'Real', true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+We berekenen  voor de kritische punten:
+f(kritisch.x(1), kritisch.y(1))
+f(kritisch.x(2), kritisch.y(2))
+
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+%fcontour(f(x,y), [a, b, c, d], 'LevelList', [subs(w, x, kritisch(1)), ...
+%    subs(w, x, kritisch(2))], 'LineColor', 'r')
+fcontour(g(x,y), [a, b, c, d], 'LevelList', [0], 'LineColor', 'g')
+scatter([kritisch.x(1), kritisch.y(1)], [kritisch.x(2), kritisch.y(2)], 'fill', 'MarkerFaceColor', 'b')
+hold off
+axis equal
+
+%8.4a
+clear all
+
+syms x y
+f(x,y) = 2*x^2 + y^2 + 2*x
+g(x,y) = x^2 + y^2 - 1
+We introduceren een hulpveranderlijke  en berekenen de kritische punten van  
+syms lambda z
+W = f(x,y) - lambda * (g(x,y) + z^2)
+gradW = gradient(W, [x, y, z, lambda])
+kritisch = solve(gradW)
+disp([kritisch.x, kritisch.y, kritisch.z, kritisch.lambda])
+aantal = length(kritisch.x)
+
+We vinden 4 kritische punten van  W . Van elk gevonden punt zoeken we de overeenkomstige functiewaarde . In elk punt berekenen we ook Δ en de tweede afgeleide van  naar  x . Alleen als λ = 0 (dan wordt eigenlijk geen rekening gehouden met de beperking) gebruiken we die resultaten om te weten over welk soort kritisch punt het gaat.
+delta = det(hessian(f(x,y), [x,y]))
+fxx = diff(f(x,y), x, 2)
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.z(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('___________________________')
+end
+
+%8.5
+clear all
+
+syms x y
+f(x,y) = x*y*(x-2*y+4)
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.6a
+clear all
+
+syms x y
+f(x,y) = x^2*(x^2-y^2)
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+a = -3; b = 3; c = -2; d = 2;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+
+%b
+syms x y
+f(x,y) = x^2*(x^2-y^2)
+g(x,y) = x^2 + y^2 - 4
+We introduceren een hulpveranderlijke  en berekenen de kritische punten van  
+syms lambda z
+W = f(x,y) - lambda * (g(x,y) + z^2)
+ gradW = gradient(W, [x, y, z, lambda])
+kritisch = solve(gradW)
+disp([kritisch.x, kritisch.y, kritisch.z, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.z(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.7
+clear all
+
+syms x y
+f(x,y) = (3*y+2*x^2-5)*(y^2-1)
+
+a = -3; b = 3; c = -2; d = 2;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    scatter(kritisch.x(i),kritisch.y(i), 'fill', 'MarkerFaceColor', 'b')
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    vpa(f0)
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    vpa(Delta)
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    vpa(f2)
+    disp('______________')
+hold off
+axis equal
+end
+
+%b
+syms x y lambda
+g(x,y)=3*y-2*x^2+5
+f(x,y) = (3*y+2*x^2-5)*(y^2-1)
+
+W = f(x,y) - lambda * g(x,y)
+
+We zoeken de kritische punten van W door de partiële afgeleiden nul te stellen en deze vergelijkingen op te lossen naar x, y en λ:
+gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW, 'Real', true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    scatter(kritisch.x(i),kritisch.y(i), 'fill', 'MarkerFaceColor', 'b')
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    vpa(f0)
+    disp('______________')
+hold off
+axis equal
+end
+
+%8.8
+clear all
+
+syms x y
+f(x,y) = (x^2-4)*(y^2-x^2)
+
+a = -3; b = 3; c = -3; d = 3;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    scatter(kritisch.x(i),kritisch.y(i), 'fill', 'MarkerFaceColor', 'b')
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+hold off
+axis equal
+end
+
+%C
+syms x y
+f(x,y) = (x^2-4)*(y^2-x^2)
+g(x,y) = x^2 + y^2 - 4
+
+syms lambda z
+W = f(x,y) - lambda * (g(x,y))
+ gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW,'Real',true,'ReturnConditions',true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.9a
+clear all
+
+syms x y
+f(x,y) = (x^2-y^2-9)*(x^2-25)
+
+a = -6; b = 6; c = -6; d = 6;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+Het aantal kritische punten kunnen we bepalen door het commando length toe te passen op de velden kritisch.x of kritisch.y
+aantal = length(kritisch.x)
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    scatter(kritisch.x(i),kritisch.y(i), 'fill', 'MarkerFaceColor', 'b')
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+hold off
+axis equal
+end
+
+%c
+syms x y
+f(x,y) = (x^2-y^2-9)*(x^2-25)
+g(x,y) = x^2 + y^2 - 25
+
+syms lambda z
+W = f(x,y) - lambda * (g(x,y))
+ gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW,'Real',true,'ReturnConditions',true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%Nu komt het wel uit! 
+%Wel opletten bij dit soort vragen 
+% Een belangrijke opmerking: zorg dat je goed weet of je te maken hebt met een gelijkheidsbeperking of een ongelijkheidsbeperking. 
+% In oefeningen 8.9.c en 8.10.b gaat het over een gelijkheidsbeperking en jij gebruikt een extra z die er alleen bij moet als je te maken hebt met een ongelijkheidsbeperking.
+
+%8.10
+clear all
+
+syms f1(x,y)
+f1(x,y)=(x^2+y^2-4)*((y-2)^2-x^2)
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf,'Real',true,'ReturnConditions',true)
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%b
+syms x y
+f(x,y) = (x^2+y^2-4)*((y-2)^2-x^2)
+g(x,y) = x^2 + y^2 - 9
+
+syms lambda z
+W = f(x,y) - lambda * (g(x,y))
+ gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW,'Real',true,'ReturnConditions',true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.11
+syms u x y z
+g(u,x)=(u-1)*(u-4)*(u+3*x^2-4)
+f1(x,y)=g(x^2+y^2,x)
+
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf,'Real',true,'ReturnConditions',true)
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.11c
+syms u x y z
+g(u,x)=(u-1)*(u-4)*(u+3*x^2-4)
+f1(x,y)=g(x^2+y^2,x)
+%extrema bekomen in vorige vraag 
+
+%f(+-sqrt(3),0)=f(0,0)=-16 MIN
+%f(0, +-sqrt(2)) = 4 MAX
+
+%x=2
+f(y)=diff(f1(2,y),y)
+extema_X2=solve(diff(f1(2,y),y),y,"Real",true)
+disp(extema_X2)
+f1(2,extema_X2)
+
+%x=-2
+f(y)=diff(f1(-2,y),y)
+extema_X2neg=solve(diff(f1(-2,y),y),y,"Real",true)
+disp(extema_X2neg)
+f1(-2,extema_X2neg)
+
+%y=2
+f(y)=diff(f1(x,2),y)
+extema_Y2=solve(diff(f1(x,2),x),x,"Real",true)
+disp(extema_Y2)
+f1(extema_Y2,2)
+
+%y=-2
+f(y)=diff(f1(x,-2),y)
+extema_Y2neg=solve(diff(f1(x,-2),x),x,"Real",true)
+disp(extema_Y2neg)
+f1(extema_Y2neg,-2)
+
+%8.12
+clear all
+
+syms f1(x,y)
+f1(x,y)=(y^4-x^2)*exp(-x^2-y^2)
+fsurf(f1(x,y), [-1, 1, -1, 1])
+gradf = gradient(f1(x,y), [x, y])
+kritisch = solve(gradf,'Real',true,'ReturnConditions',true)
+aantal = length(kritisch.x)
+disp([kritisch.x, kritisch.y])
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(x,y), [x, y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f1(kritisch.x(i), kritisch.y(i));
+    f0
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+
+%8.12c
+syms x y
+f(x,y) = (y^4-x^2)*exp(-x^2-y^2)
+g(x,y) = x^2 + y^2 - 1
+
+a = -6; b = 6; c = -6; d = 6;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', 1:12, 'LineColor', 'k')
+
+We introduceren een hulpveranderlijke  en berekenen de kritische punten van  
+syms lambda z
+W = f(x,y) - lambda * (g(x,y) + z^2)
+ gradW = gradient(W, [x, y, z, lambda])
+kritisch = vpasolve(gradW==0)
+disp([kritisch.x, kritisch.y, kritisch.z, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.z(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.13
+%a volume bepalen 
+clear all
+syms theta u x y z H R
+t = theta;
+Sigma = [u*cos(t),u*sin(t),(H/R)*u]
+We berekenen de normaal op de bol en zorgen ervoor dat die naar buiten wijst door  als eerste en  als tweede parameter te kiezen.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+G = [-x, 0, 0]
+divergence(G, [x,y,z])
+Met dit vectorveld krijgen we dan hetzelfde resultaat.
+G_oppervlak = subs(G, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, R]), t, [0, 2*pi])
+
+%b oppervlakte bepalen 
+clear all
+syms t u x y z H R
+PM = [u*cos(t),u*sin(t),(H/R)*u]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+assume(R,'positive')
+assume(H,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,R])
+int_2=int(int_1,t,[0,2*pi]) 
+
+%c
+clear all
+
+syms x y V
+%X=R
+%y=H
+
+f(x,y) =pi*x*sqrt(x^2+y^2)
+g(x,y) = pi*x*sqrt((3*V/(pi*y^2))^2+x^2)
+
+syms lambda z
+W = f(x,y) - lambda * (g(x,y))
+ gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW,'Real',true,'ReturnConditions',true)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.14
+
+
+%8.15
+clear all 
+syms x1 x2 y1 y2 lambda1 lambda2
+
+% Methode 2: Lagrange
+d_kwadr=(x1-x2)^2+(y1-y2)^2
+w(x1, y1, x2, y2, lambda1, lambda2) =d_kwadr  - lambda1*(y1-x1^2-1) - lambda2*(y2^2-x2)
+grad_w = gradient(w, [x1, y1, x2, y2, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x1, y1, x2, y2, lambda1, lambda2])
+
+disp([krit.x1, krit.y1, krit.x2, krit.y2, krit.lambda1, krit.lambda2])
+
+number=length(krit.x)
+for i = 1:number
+    sqrt(vpa(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2])))
+    sqrt(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2]))
+    %afstand is gekwadrateerd 
+end
+
+%8.16
+clear all 
+syms x1 x2 y1 y2 lambda1 lambda2
+
+% Methode 2: Lagrange
+d_kwadr=(x1-x2)^2+(y1-y2)^2
+w(x1, y1, x2, y2, lambda1, lambda2) =d_kwadr  - lambda1*(y1-sin(x1)) - lambda2*(y2-x1^2-1)
+grad_w = gradient(w, [x1, y1, x2, y2, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x1, y1, x2, y2, lambda1, lambda2])
+
+disp([krit.x1, krit.y1, krit.x2, krit.y2, krit.lambda1, krit.lambda2])
+
+number=length(krit.x1)
+for i = 1:number
+    sqrt(vpa(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2])))
+    sqrt(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2]))
+    %afstand is gekwadrateerd 
+end
+
+%8.17
+syms x y
+f(x,y) = x^2+2*y^2-x
+g(x,y) = x^2 + y^2 - 1
+We introduceren een hulpveranderlijke  en berekenen de kritische punten van  
+syms lambda z
+W = f(x,y) - lambda * (g(x,y) + z^2)
+ gradW = gradient(W, [x, y, z, lambda])
+kritisch = solve(gradW,'Real',true,'ReturnConditions',true)
+disp([kritisch.x, kritisch.y, kritisch.z, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.z(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+
+%8.18
+clear all
+
+syms x y z
+f(x,y) = 1-x-y
+g(x,y) = x^2 + y^2 - 1
+syms lambda z
+W = f(x,y) - lambda * (g(x,y))
+gradW = gradient(W, [x, y, lambda])
+kritisch = solve(gradW)
+disp([kritisch.x, kritisch.y, kritisch.lambda])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i), kritisch.lambda(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0
+    disp('___________________________')
+end
+%Enkel de verste punten 
+
+clear all
+close all
+clc
+
+syms f(x, y, z) phi theta w(x, y, z, lambda1, lambda2)
+
+f(x, y, z) = x^2+y^2+z^2
+
+% Methode 2: Lagrange
+
+w(x, y, z, lambda1 , lambda2) = f - lambda1*(x+y+z-1) - lambda2*(x^2+y^2-1)
+grad_w = gradient(w, [x, y, z, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x, y, z, lambda1, lambda2])
+
+disp([krit.x, krit.y, krit.z, krit.lambda1, krit.lambda2])
+
+number=length(krit.x)
+for i = 1:number
+    sqrt(vpa(subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)])))
+    sqrt(subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)]))
+    %afstand is gekwadrateerd 
+end
+
+%alternatieve manier van bepalen extrema
+syms u theta
+t=theta;
+d_kwadr=u^2+(1-u*(cos(t)+sin(t)))^2
+grad = gradient(W, [u,t])
+kritisch = solve(grad,[u,t])
+disp([kritisch.u, kritisch.t])
+aantal = length(kritisch.x)
+
+for i = 1 : aantal
+    u_value=kritisch.u(i)
+    t_value=kritisch.t(i)
+    x_value=u_value*cos(t_value)
+    y_value=u_value*sin(t_value)
+    z_value=1-u_value*(cos(t_value)+sin(t_value))
+    disp('___________________________')
+end
+
+%8.19
+clear all
+close all
+clc
+
+syms f(x, y, z) phi theta w(x, y, z, lambda1, lambda2)
+
+f(x, y, z) = 4-z
+
+% Methode 2: Lagrange
+
+w(x, y, z, lambda1 , lambda2) = f - lambda1*(x^2+y^2-8) - lambda2*(x+y+z-1)
+grad_w = gradient(w, [x, y, z, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x, y, z, lambda1, lambda2])
+
+disp([krit.x, krit.y, krit.z, krit.lambda1, krit.lambda2])
+
+number=length(krit.x)
+for i = 1:number
+    vpa(subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)]))
+    subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)])
+end
+
+%8.20
+clear all
+close all
+clc
+
+syms f(x, y, z) phi theta w(x, y, z, lambda1, lambda2)
+
+f(x, y, z) = x
+
+% Methode 2: Lagrange
+
+w(x, y, z, lambda1 , lambda2) = f - lambda1*(z-(x+y)) - lambda2*(x^2+2*y^2+2*z^2-8)
+grad_w = gradient(w, [x, y, z, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x, y, z, lambda1, lambda2])
+
+disp([krit.x, krit.y, krit.z, krit.lambda1, krit.lambda2])
+
+number=length(krit.x)
+for i = 1:number
+    vpa(subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)]))
+    subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)])
+end
+
+%8.21
+clear all
+close all
+clc
+
+syms f(x, y, z) vlak(x, y, z) bol(x, y, z) phi theta w(x, y, z, lambda1, lambda2)
+
+f(x, y, z) = x*y + 2*z
+
+% Methode 2: Lagrange
+
+w(x, y, z, lambda1 , lambda2) = f - lambda1*(x + y + z) - lambda2*(x^2 + y^2 + z^2 - 24)
+grad_w = gradient(w, [x, y, z, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x, y, z, lambda1, lambda2])
+
+disp([krit.x, krit.y, krit.z, krit.lambda1, krit.lambda2])
+
+for i = 1:4
+    vpa(subs(f, [x, y, z], [krit.x(i), krit.y(i), krit.z(i)]))
+end
+
+%8.22
+clear all 
+syms x1 x2 y1 y2 lambda1 lambda2
+
+% Methode 2: Lagrange
+d_kwadr=(x1-x2)^2+(y1-y2)^2
+w(x1, y1, x2, y2, lambda1, lambda2) =d_kwadr  - lambda1*(x1^2+4*y1-1) - lambda2*(13*x2^2+10*x2*y2+13*y2^2-36)
+grad_w = gradient(w, [x1, y1, x2, y2, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x1, y1, x2, y2, lambda1, lambda2])
+
+disp([krit.x1, krit.y1, krit.x2, krit.y2, krit.lambda1, krit.lambda2])
+
+number=length(krit.x1)
+for i = 1:number
+    sqrt(vpa(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2])))
+    sqrt(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2]))
+    %afstand is gekwadrateerd 
+end
+
+%8.23
+clear all 
+syms x1 x2 y1 y2 lambda1 lambda2
+
+% Methode 2: Lagrange
+d_kwadr=(x1-x2)^2+(y1-y2)^2
+w(x1, y1, x2, y2, lambda1, lambda2) =d_kwadr  - lambda1*(x1^2+y1^2+x1^3/5+x1*y1-1) - lambda2*(4*x2^2+16*y2-1)
+grad_w = gradient(w, [x1, y1, x2, y2, lambda1, lambda2])
+
+krit = solve(grad_w == 0, [x1, y1, x2, y2, lambda1, lambda2])
+
+disp([krit.x1, krit.y1, krit.x2, krit.y2, krit.lambda1, krit.lambda2])
+
+number=length(krit.x1)
+for i = 1:number
+    sqrt(vpa(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2])))
+    sqrt(subs(sqrt(d_kwadr), [x1, y1, x2, y2], [krit.x1, krit.y1, krit.x2, krit.y2]))
+    %afstand is gekwadrateerd 
+end
+
+%8.24
+syms x y z theta r
+t=theta;
+PM=[r*cos(t),r*sin(t)]
+
+vgl=x^2+3*y^2+x*y+x+y==10
+
+vgl=subs(vgl,x,PM(1))
+vgl=subs(vgl,y,PM(2))
+
+r_ellips=solve(vgl,r)
+r_ellips=r_ellips(2)
+
+r_given=sqrt(1/((cos(t))^2+2*(sin(t))^2))
+
+%foute aanpak 
+%r_total=r_ellips-r_given
+%vgl1=diff(r_total,t)==0
+%t_optimal=vpasolve(vgl1,t)
+%subs(r_total,t,t_optimal)
+
+f1(r,t)=(r_ellips*cos(t)-r_given*cos(t))^2+(r_ellips*sin(t)-r_given*sin(t))^2
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f1(r,t), [r,t]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f1(r,t),r,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.r(i), kritisch.t(i)];
+    p0
+    f0 = f1(kritisch.r(i), kritisch.t(i));
+    f0
+    Delta = subs(delta, {r,t}, {kritisch.r(i), kritisch.t(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.r(i), kritisch.t(i)});
+    f2
+    disp('______________')
+end
+
+%8.24
+%clear all 
+%syms x y r theta
+
+%f = (rcos(theta)-x)^2 + (rsin(theta)-y)^2
+%g1 = x^2 +3y^2 + xy +x + y - 10
+%g2 = sqrt(1/(cos(theta)^2 + 2 * sin(theta)^2)) - r
+%We zoeken de kritische punten van W
+syms lambda gamma
+%W = f - lambda * g1 - gamma * g2
+%We zoeken de kritische punten door de partiële afgeleiden nul te stellen en deze vergelijkingen op te lossen naar x, y en λ:
+%gradW = gradient(W, [x, y, r, theta, lambda, gamma])
+%kritisch = vpasolve(gradW)
+%disp([kritisch.x, kritisch.y, kritisch.r, kritisch.theta, kritisch.lambda, kritisch.gamma])
+%afstand_kwadraat = subs(f, [x, y, r, theta], [kritisch.x, kritisch.y, kritisch.r, kritisch.theta])
+%afstand = sqrt(afstand_kwadraat)
+
