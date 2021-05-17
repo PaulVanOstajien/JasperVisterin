@@ -1,5 +1,5 @@
 - 👀 I’m interested in engineering, science, math, chemistry, physics, etc. 
-- 🌱 I’m currently learning general engineering @KU Leuven
+- 🌱 I’m currently learning general engineering
 - 💞️ I’m looking to collaborate on idk yet. 
 
 <!---
