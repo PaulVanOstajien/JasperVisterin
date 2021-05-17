@@ -1,0 +1,2331 @@
+%5.1a
+clear all
+syms t x y z
+gamma = [t,t^2]
+en het vectorveld .
+F(x,y,z) = [x^2*y,x*y^2]
+We berekenen de lijnintegraal van het vectorveld F over de schroeflijn met een integraal van de vorm . Om het vectorveld langs de kromme uit te rekenen, moeten we F evalueren in .
+F=subs(F,x,gamma(1))
+F=subs(F,y,gamma(2))
+De afgeleide van kunnen we berekenen met diff.
+d_gamma(t) = diff(gamma,t)
+Het scalair product berekenen we met dot.
+assume(t, 'real')
+integrand = t^4+2*t^6
+integrand=simplify(expand(integrand))
+Tenslotte berekenen we de integraal.
+int(integrand,t,[0, 1])
+
+%5.1b
+clear all
+
+syms t
+param = [t,0]
+
+syms x y z
+F = [sin(y),-sin(x)]
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [1-t,t]
+
+syms x y z
+F = [sin(y),-sin(x)]
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(1/2))
+
+syms t
+param = [t,t]
+
+syms x y z
+F = [sin(y),-sin(x)]
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel3=int(integrand, t, sym(0), sym(1/2))
+som=deel1+deel2+deel3
+
+%5.1c
+clear all
+
+syms t
+param = [cos(t),sin(t),t]
+syms x y z
+F = [z^2,x^2,y]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+integraal=int(integrand, t, sym(0), sym(2*pi))
+
+
+%5.1d
+clear all
+
+syms x y z
+syms t
+F = [x*exp(x*y),y*exp(x*y)]
+param = [t,0]
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(4))
+
+syms t
+param = [4-t,t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(4))
+
+syms t
+param = [0,t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel3=int(integrand, t, sym(4), sym(0))
+som=deel1+deel2+deel3
+
+%5.1e
+clear all
+
+syms t
+param = [cos(t),sin(t),0]
+
+syms x y z
+F = [y*z;x*z;x*y]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+int(integrand, t, sym(0), sym(1))
+
+%5.1f
+clear all
+syms t
+f(t)=2*t^5-4*t^4-3*t^3+t^2
+int(f(t),t,[-1,1])
+
+%5.1g
+clear all
+
+syms t
+param = [cos(t),sin(t),0]
+
+syms x y z
+F = [x^2*y^2+x*y-y*z; 0;0 ]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+int(integrand, t, sym(pi), sym(0))
+
+%5.1h
+clear all
+
+syms t
+param = [t,0,-t]
+
+syms x y z
+F = [2*x*y-z,y*z,x]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+deel_1=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [1+t,3*t,-1-2*t]
+
+syms x y z
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+deel_2=int(integrand, t, sym(0), sym(1))
+som=deel_1+deel_2
+
+%5.1i
+clear all
+
+syms t
+param = [1 + 2 * t; 4 * t; 2 - t]
+
+syms x y z
+F = [2 * x * y; x^2 + z; y]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+int(integrand, t, sym(0), sym(1))
+
+%5.1j
+clear all
+syms t x y z
+gamma = [(cos(t))^3,(sin(t))^3,t]
+
+F(x,y,z) = [sin(z), cos(z), (x*y)^(1/3)]
+F_na_gamma(t) = F(gamma(1),gamma(2),gamma(3))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+
+int(integrand,t,[0, 7*pi/2])
+int(cos(t)*sin(t),t,[0,7*pi/2])
+
+%5.2a
+clear all
+syms t x y z
+gamma = [t,(-1/5)*(t-1)^2+9/5]
+
+F(x,y) = [2*x+y;x]
+F_na_gamma(t) = F(gamma(1),gamma(2))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+
+int(integrand,t,[-2,3])
+
+%5.2b
+clear all
+syms t x y z a
+gamma = [t,t-1,t^2]
+F(x,y,z) = [y*log(x),y^2,x/z]
+F_na_gamma(t) = F(gamma(1),gamma(2),gamma(3))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+int(integrand,t,[1, a])
+
+%5.2c
+clear all
+syms t x y z a
+gamma = [t,t,t]
+F(x,y,z) = [2*x*y,x^2+2*y*z,y^2+1]
+F_na_gamma(t) = F(gamma(1),gamma(2),gamma(3))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+int(integrand,t,[0,1])
+
+%5.2d
+clear all
+syms t x y z a
+gamma = [a*(cos(t))^3,a*(sin(t))^3]
+F(x,y) = [x^2*y*cos(x)+2*x*y*sin(x)-y^2*exp(x),x^2*sin(x)-2*y*exp(x)]
+F_na_gamma(t) = F(gamma(1),gamma(2))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+int(integrand,t,[0,2*pi])
+
+%5.2e
+clear all
+
+syms t
+param = [-t,1-t]
+
+syms x y z
+F = [1/(x+y),-1/(x+y)]
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [t-1,-t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [t,t-1]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel3=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [1-t,t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel4=int(integrand, t, sym(0), sym(1))
+
+som=deel1+deel2+deel3+deel4
+
+%5.2f
+clear all
+syms t x y z a b
+gamma = [a*cos(t),b*sin(t)]
+F(x,y) = [x+y;x-y]
+F_na_gamma(t) = F(gamma(1),gamma(2))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+int(integrand,t,[0,2*pi])
+
+%5.2g
+clear all
+syms t x y z 
+gamma = [1+t,2-t]
+F(x,y) = [1/y,-x/(y^2)]
+F_na_gamma(t) = F(gamma(1),gamma(2))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+integrand=simplify(expand(integrand))
+int(integrand,t,[0,1])
+
+%5.3a
+clear all
+syms x y z
+F=[2*x-y+4;3*x+5*y-6]
+%testen of veld conservatief is 
+diff(F(1,:),y)-diff(F(2,:),x)
+
+
+syms t
+param = [t,0]
+
+syms x y z
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(3))
+
+syms t
+param = [3,t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(2))
+
+syms t
+param = [3-t,2-(2/3)*t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel3=int(integrand, t, sym(0), sym(3))
+sum=deel1+deel2+deel3
+
+%5.3b 
+clear all
+syms x y z
+F=[y^2*cos(x)+z^3,2*y*sin(x)-4,3*x*z^2+2]
+%testen of veld conservatief is 
+divergence(F)
+curl(F)
+syms t
+param = [(pi/2)*t,1-2*t,3*t-1]
+syms x y z
+a = subs(F, {x, y,z}, {param(1), param(2),param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel=int(integrand, t, sym(0), sym(1))
+
+%5.3c: uitgewerkt in de werkbundel van analyse 
+
+%5.3d
+%i
+clear all
+syms x y z
+F=[x^2-y;y^2+x]
+%testen of veld conservatief is 
+divergence(F)
+%curl(F): kan niet uitgerekend worden met 3D benadering
+diff(F(1,:),y)-diff(F(2,:),x)
+%veld is niet conservatief: alles nog uitrekenen
+syms t
+param = [t,t+1]
+syms x y
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel=int(integrand, t, sym(0), sym(1))
+
+%5.3dii 
+clear all
+syms x y z
+F=[x^2-y;y^2+x]
+syms t
+param = [t,1]
+
+syms x y z
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [1,1+t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(1))
+som=deel1+deel2
+
+%5.3diii
+clear all
+syms x y z
+F=[x^2-y;y^2+x]
+syms t
+param = [t,t^2+1]
+
+syms x y z
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(1))
+
+%5.4a
+clear all
+syms x y z
+F=[x*y+y^2;x^2]
+syms t
+param = [t,t^2]
+
+syms x y z
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(1))
+
+syms t
+param = [1-t,1-t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(1))
+som=deel1+deel2
+%lijnintegraal 
+
+%oppervlakintegraal 
+M=F(1,1)
+N=F(2,1)
+integrand2 = diff(N,x) - diff(M,y)
+-int(int(integrand2, y, [x,x^2]), x, [0,1])
+
+%5.4b
+syms x y z r t
+F=[2*x-y^3,-x*y]
+
+param=[3*cos(t),3*sin(t)]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p1=int(integrand,t,[0,2*pi])
+
+param=[sin(t),cos(t)]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p2=int(integrand,t,[0,2*pi])
+total=p1+p2
+%lijnintegraal berekend 
+M=F(1,1)
+N=F(1,2)
+integrand2 = diff(N,x) - diff(M,y)
+integrand2=subs(integrand2, {x, y}, {r*cos(t), r*sin(t)})
+int(int(r*integrand2, t, [0,2*pi]), r, [1,3])
+%Jacobiaan moet nog toegevoegd worden! 
+%Bij transformatie: Jacobiaan toepassen!! 
+
+%5.4c
+clear all
+syms x y
+F=[x^2-x*y^3,y^2-2*x*y]
+
+syms t
+param = [t,0]
+
+syms x y z
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel1=int(integrand, t, sym(0), sym(2))
+
+syms t
+param = [2,t]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel2=int(integrand, t, sym(0), sym(2))
+
+syms t
+param = [t,2]
+
+syms x y z
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel3=int(integrand, t, sym(2), sym(0))
+
+syms t
+param = [0,2-t]
+
+syms x y z t u
+
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel4=int(integrand, t, sym(0), sym(2))
+
+sum=deel1+deel2+deel3+deel4
+%lijnintegraal bepaald 
+
+M=F(1,1)
+N=F(1,2)
+integrand2 = diff(N,x) - diff(M,y)
+int1=int(integrand2,x,[0 2])
+int2=int(int1,y,[0 2])
+
+%5.4d
+syms x y z r t
+F=[x^2*y,x^3]
+
+param=[2*cos(t),2*sin(t)]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p1=int(integrand,t,[pi/4,pi/4+pi])
+
+param=[sin(t),cos(t)]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p2=int(integrand,t,[pi/4,pi+pi/4])
+
+param=[t,t]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p3=int(integrand,t,[sqrt(2),sqrt(2)/2])
+
+param=[-t,-t]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p4=int(integrand,t,[sqrt(2)/2,sqrt(2)])
+
+total=p1+p2+p3+p4
+
+
+%lijnintegraal berekend 
+M=F(1,1)
+N=F(1,2)
+integrand2 = diff(N,x) - diff(M,y)
+integrand2=subs(integrand2, {x, y}, {r*cos(t), r*sin(t)})
+int(int(r*integrand2, t, [pi/4,pi+pi/4]), r, [1,2])
+%Jacobiaan moet nog toegevoegd worden! 
+%Bij transformatie: Jacobiaan toepassen!! 
+
+%oef5.5a
+clear all
+
+syms x y z
+F = [3 * x - 4 * y + 2 * z; 4 * x + 2 * y - 3 * z^2; 2 * x * z - 4 * y^2 + z^3]
+
+syms t
+param = [4 * cos(t); 3 * sin(t); sym(0)]
+arbeid berekend met een lijnintegraal:
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+a(:).' * b(:)
+integrand = simplify(ans)
+
+integral=int(integrand, t, sym(0), 2 * sym('pi'))
+integral=simplify(integral)
+
+%oef5.5b i
+%flux berekenen: int(F((u,v)) * n du dv)
+clear all
+syms t x y z r R
+gamma = [R*cos(t),R*sin(t)]
+F(x,y) = [-x,-y]
+
+F_na_gamma(t) = F(gamma(1),gamma(2))
+d_gamma(t) = diff(gamma,t)
+assume(t, 'real')
+integrand = dot(F_na_gamma(t),d_gamma(t))
+int(integrand,t,[0, 2*pi])
+
+%5.5bii
+clear all
+syms t x y z r R a b c d
+gamma = [x,y]
+F = [-y,x]
+
+M=F(1,1)
+N=F(1,2)
+integrand2 = diff(N,x) - diff(M,y)
+int(int(integrand2, y, [c,d]), x, [a,b])
+
+%5.5bIII
+syms x y z r t
+F=[1,0]
+
+param=[t,0]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p1=int(integrand,t,[0,1])
+
+param=[1-t,t]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p2=int(integrand,t,[0,1])
+
+param=[0,t]
+a = subs(F, {x, y}, {param(1), param(2)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+p3=int(integrand,t,[1,0])
+
+total=p1+p2+p3
+
+
+%lijnintegraal berekend 
+M=F(1,1)
+N=F(1,2)
+integrand2 = diff(N,x) - diff(M,y)
+int(int(integrand2, y, [0,1-x]), y, [0,1])
+
+%5.5bIV
+syms x y z 
+F=[x,0]
+M=F(1,2)
+N=F(1,1)
+integrand2 = diff(N,x) - diff(M,y)
+int(int(integrand2, y, [-1,1]), y, [-1,1])
+
+
+%5.5CI uitgewerkt in voorbereidende oefeningen 
+
+%5.5cII
+clear all
+syms x y t a
+gamma = a*[(cos(t))^3,(sin(t))^3]
+F=[0; x]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(a,'positive')
+d_gamma(t) = simplify((diff(gamma, t)))
+F=subs(F,x,gamma(1))
+F=subs(F,y,gamma(2))
+integrand=dot(F,d_gamma(t))
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+value= int(4*integrand, t, [0,pi/2])
+value_num=vpaintegral(integrand, t, [0,2*pi])
+
+%5.5cIII
+%als je een vectorveld kiest zodanig dat de norm in de dubbele integraal 1
+%wordt, zal dit een oppervlak geven 
+
+syms x y t 
+gamma = [exp(cos(t)),exp(sin(t))]
+F=[0; x]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify((diff(gamma, t)))
+F=subs(F,x,gamma(1))
+F=subs(F,y,gamma(2))
+integrand=dot(F,d_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(integrand, t, [0,2*pi])
+value_num=vpaintegral(integrand, t, [0,2*pi])
+
+%5.6a: met de hand 
+%5.6b: met de hand
+%5.6c 
+Oppervlakintegraal
+clear all
+syms t u x y z
+PM = [t^2/8, t, u]
+F = [2*y, -z,x^2]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,t), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0, 4])
+int2=int(int1,u,[0 6])
+
+%5.6d
+clear all
+syms t u x y z
+PM = [u*cos(t), u*sin(t), u]
+F = [4*x*z,x*y*z^2,3*z]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,t), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0,4])
+int2=int(int1,t,[0,2*pi])
+
+%5.6e
+clear all
+syms t x y z a s
+PM1 = [a-t-s,s,t]
+F = [x,y,z]
+Voor elk deeloppervlak de oppervlakvector berekenen 
+normaal = cross(diff(PM1,s), diff(PM1,t));
+normaal = simplify(normaal)
+F=subs(F, x,PM1(1))
+F=subs(F, y,PM1(2))
+F=subs(F, z,PM1(3))
+integrand=sum(dot(F,normaal))
+int1=int(integrand, t, [0,a-s])
+int2=int(int1,s,[0,a])
+
+%5.6f
+clear all
+syms v u x y z
+PM = [u+v,u-v,u*v]
+F = [x*y,z,3*x*z]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,u), diff(PM,v));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0,1])
+int2=int(int1,v,[0,1])
+
+%5.6g
+clear all
+syms t s x y z
+PM = [0,t,s]
+F = [4*x*z,-y^2,y*z]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_1=int2
+
+syms v u x y z
+PM = [1,t,s]
+F = [4*x*z,-y^2,y*z]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_2=int2
+
+syms v u x y z
+PM = [t,0,s]
+F = [4*x*z,-y^2,y*z]
+normaal = -cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_3=int2
+
+syms v u x y z
+PM = [t,1,s]
+F = [4*x*z,-y^2,y*z]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = -simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_4=int2
+
+syms v u x y z
+PM = [t,s,0]
+F = [4*x*z,-y^2,y*z]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_5=int2
+
+syms v u x y z
+PM = [t,s,1]
+F = [4*x*z,-y^2,y*z]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_6=int2
+totaal=deel_1+deel_2+deel_3+deel_4+deel_5+deel_6
+
+%5.6h
+clear all
+syms o p x y z a
+PM = [a*sin(p)*cos(o),a*sin(p)*sin(o),a*cos(p)]
+F = [x*z^2,x^2*y-z^3,2*x*y+y^2*z]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,p), diff(PM,o));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, o, [0,2*pi])
+int2=int(int1,p,[0,pi/2]) %bovenste helft van de bol
+
+%5.6i 
+clear all
+syms t u x y z
+PM = [u*cos(t),u*sin(t),2-u^2]
+F = [z,x^3,x^2+y^3]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,u), diff(PM,t));
+normaal = simplify(normaal)
+F=curl(F)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(dot(F,normaal))
+int1=int(integrand, t, [0, 2*pi])
+int2=int(int1,u,[0, 1])
+
+
+%5.6d
+clear all
+syms t u x y z
+PM = [u*cos(t), u*sin(t), u]
+F = [4*x*z,x*y*z^2,3*z]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,t), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0,4])
+int2=int(int1,t,[0,2*pi])
+
+5.7a
+We definiëren het vectorveld F.
+clear all
+syms t s x y z
+F = [y-z+2,y*z+4,-x*z]
+Sigma = [0,t,s] %x=0
+We berekenen de normaal op het oppervlak.
+normaal = -simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, s, [0, 2]), t, [0, 2])
+
+Sigma = [2,t,s] %x=2
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, s, [0, 2]), t, [0, 2])
+
+
+Sigma = [t,0,s] %y=0
+We berekenen de normaal op het oppervlak.
+normaal = -simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal3 = int(int(integrand, s,[0, 2]), t, [0, 2])
+
+Sigma = [t,2,s] %y=2
+We berekenen de normaal op het oppervlak.
+normaal = -simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal4 = int(int(integrand, s, [0, 2]), t, [0, 2])
+
+Sigma = [t,s,2] %z=2
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal5 = int(int(integrand, s, [0, 2]), t, [0, 2])
+
+som=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3+oppervlakintegraal4+oppervlakintegraal5
+
+%5.7b
+We definiëren het vectorveld F.
+clear all
+syms t s x y z
+Sigma = [t,2*s,4-t-s]
+F = [x*z,-y,x^2*y]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, s, [0, 4-t]), t, [0, 4])
+
+
+Sigma = [t,2*s,0]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, s, [0, 4-t]), t, [0, 4])
+
+Sigma = [0,t,s*(4-t)]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,s)))
+
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([t,s], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal3 = int(int(integrand, s, [0, 1]), t, [0, 4])
+
+
+som=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3
+%oppervlakintegraal 
+
+syms t
+param = [t,0,4-t]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+deel_1=int(integrand, t, sym(0), sym(4))
+
+param = [4-t,2*t,0]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+
+deel_2=int(integrand, t, sym(0), sym(4))
+
+param = [0,8-2*t,t]
+
+a = subs(F, {x, y, z}, {param(1), param(2), param(3)})
+b = diff(param, t)
+integrand = a(:).' * b(:)
+deel_3=int(integrand, t, sym(0), sym(4))
+
+som=deel_1+deel_2+deel_3
+
+%5.7c
+We definiëren het vectorveld F.
+clear all
+syms u v R theta x y z
+Sigma = R*[sin(theta)*cos(u), sin(theta)*sin(u), cos(theta)]
+F = [2*y,3*x,-z^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, v], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 2*pi]), theta, [0, pi/2])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[R*cos(theta),R*sin(theta),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal = int(integrand2, theta, [0, 2*pi])
+%3 substitueren in de uitdrukking geeft de gevraagde uitdrukking
+
+%5.7d
+We definiëren het vectorveld F.
+clear all
+syms u v theta x y z
+Sigma = [v*cos(u), v*sin(u), v^2/2]
+F = [3*y,-x*z,y*z^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, v], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 2*pi]), v, [0, 2])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[2*cos(theta),2*sin(theta),2]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal = int(integrand2, theta, [0, 2*pi])
+
+%5.7e
+We definiëren het vectorveld F.
+clear all
+syms u v theta x y z
+Sigma = [v*cos(u),sqrt(v^2-9),v*sin(u)]
+F = [y-y*z,x-z,y*x-y]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, v], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 2*pi]), v, [3, 5])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[3*cos(-theta),0,3*sin(-theta)]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, theta, [0, 2*pi])
+
+gamma=[5*cos(theta),4,5*sin(theta)]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal2 = int(integrand2, theta, [0, 2*pi])
+integraal=lijnintegraal1+lijnintegraal2
+
+%5.8a
+We definiëren het vectorveld F.
+clear all
+syms u v R theta x y z
+Sigma = [u*cos(theta), u*sin(theta), 1-cos(theta)]
+F = [y-z,z-x,x-y]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 1]), theta, [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[cos(theta),sin(theta),1-cos(theta)]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal = int(integrand2, theta, [0, 2*pi])
+
+%5.8b
+We definiëren het vectorveld F.
+clear all
+syms u v R theta x y z
+Sigma = [u*cos(theta), u*sin(theta), 1-cos(theta)]
+%gesloten kromme
+F = [x^2-y*z,y^2-z*x,z^2-x*y]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 1]), theta, [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[cos(theta),sin(theta),1-cos(theta)]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal = int(integrand2, theta, [0, 2*pi])
+
+%5.8c
+We definiëren het vectorveld F.
+clear all
+syms u v R theta x y z t
+Sigma = [u,v,t-u-v]
+F = [y^2,z^2,x^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, v, [0, t-u]), u, [0, t])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+syms t s
+assume([t,s], 'real')
+gamma=[t*s,0,(1-s)*t]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, s)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, s, [0, 1])
+
+gamma=[0,t*s,(1-s)*t]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, s)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal2 = int(integrand2, s, [1,0])
+syms t s
+gamma=[t*s,t*(1-s),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, s)
+assume(theta, 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal3 = int(integrand2, s, [1, 0])
+assume([t,s], 'real')
+som=lijnintegraal1+lijnintegraal2+lijnintegraal3
+
+%5.8d
+clear all
+syms u v R theta x y z a t
+Sigma = [a*u*sin(t),a*u*cos(t),a*u*(sin(t)+cos(t))]
+F = [x,x+y,x+y+z]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 1]),t , [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+syms a
+gamma=[a*sin(t),a*cos(t),a*(sin(t)+cos(t))]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, t, [0, 2*pi])
+
+%5.8e
+clear all
+syms u v R theta x y z a t phi
+Sigma = [3*cos(theta)*cos(phi),3*cos(phi)*sin(theta),3*sin(phi)]
+F = [2*y,3*x,-z^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,phi)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, phi, [0, pi/2]),theta , [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+syms a
+gamma=[3*cos(theta),3*sin(theta),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, theta, [0, 2*pi])
+
+%5.8f
+clear all
+syms u v R theta x y z a t phi
+Sigma = [u*cos(theta),u*sin(theta),2-u]
+F = [x-z,x^3+y*z,-3*x*y^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,u)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 2]),theta , [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+syms a
+gamma=[2*cos(theta),2*sin(theta),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, theta, [0, 2*pi])
+
+%5.8g
+clear all
+syms u v R theta x y z a t phi
+Sigma = [a*cos(theta),a*sin(theta),t]
+F = [2*y*z,-x-3*y+2,x^2+z]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,t)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+assume(a, 'positive')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, t, [0, a*sin(theta)]),theta , [0, pi/2])
+%Maar een deel bekeken 
+
+Sigma = [a*cos(theta),t,a*sin(theta)]
+We berekenen de normaal op het oppervlak.
+normaal = -simplify(cross(diff(Sigma,theta), diff(Sigma,t)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+assume(a, 'positive')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, t, [0, a*sin(theta)]),theta , [0, pi/2])
+som=oppervlakintegraal1+oppervlakintegraal2
+som=expand(som)
+
+syms u v R theta x y z a t phi
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+syms a
+gamma=[a*cos(theta),a*sin(theta),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, theta, [0, pi/2])
+
+gamma=[0,a,t*a]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal2 = int(integrand2, t, [0, 1])
+
+gamma=[0,t*a,a]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal3 = int(integrand2, t, [1, 0])
+
+gamma=[a*cos(theta),0,a*sin(theta)]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+assume([a,t], 'real')
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal4 = int(integrand2, theta, [pi/2, 0])
+
+som=lijnintegraal1+lijnintegraal2+lijnintegraal3+lijnintegraal4
+som=expand(som)
+
+%5.8h
+clear all
+syms u v R theta x y z a t phi
+Sigma = [u*cos(theta),u*sin(theta),4-u^2]
+F = [x^2+y^2-4,3*x*y,2*x*z+z^2]
+We berekenen de normaal op het oppervlak.
+normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,u)))
+Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
+assume([u, theta], 'real')
+integrand = dot(rotor_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, u, [0, 2]),theta , [0, 2*pi])
+Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+gamma=[2*cos(theta),2*sin(theta),0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, theta)
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, theta, [0, 2*pi])
+
+%5.9a
+clear all
+syms theta varphi x y z R
+assume(R,'positive')
+t = theta; p = varphi;
+Sigma = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+We berekenen de normaal op de bol en zorgen ervoor dat die naar buiten wijst door  als eerste en  als tweede parameter te kiezen.
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+We kiezen een vectorveld waarvoor de divergentie overal 1 is, zodat we met de stelling van Gauss het volume van de bol kunnen berekenen.
+F = [1,0,0]
+divergence(F, [x,y,z])
+Volgens de stelling van Gauss is het volume van de bol gelijk aan de oppervlakintegraal van het vectorveld over de rand van de bol.
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, p, [0, pi]), t, [0, 2*pi])
+
+PM = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+
+term1_1=diff(PM(1),t)
+term2_1=diff(PM(1),p)
+term3_1=diff(PM(1),R)
+term1_2=diff(PM(2),t)
+term2_2=diff(PM(2),p)
+term3_2=diff(PM(2),R)
+term1_3=diff(PM(3),t)
+term2_3=diff(PM(3),p)
+term3_3=diff(PM(3),R)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+G=F
+Jacobiaan=det(A)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+int1=int(Jacobiaan*div,R,[0,R])
+int2=int(int1,p,[0,pi])
+int3=int(int2,t,[0,2*pi])
+%ok
+
+%5.9b
+clear all
+syms theta varphi x y z R
+assume(R,'positive')
+t = theta; p = varphi;
+Sigma = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+We berekenen de normaal op de bol en zorgen ervoor dat die naar buiten wijst door  als eerste en  als tweede parameter te kiezen.
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+We kiezen een vectorveld waarvoor de divergentie overal 1 is, zodat we met de stelling van Gauss het volume van de bol kunnen berekenen.
+F = [x,0,0]
+divergence(F, [x,y,z])
+Volgens de stelling van Gauss is het volume van de bol gelijk aan de oppervlakintegraal van het vectorveld over de rand van de bol.
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, p, [0, pi]), t, [0, 2*pi])
+
+PM = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+
+Jacobiaan=R^2*sin(p)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+int1=int(Jacobiaan*div,R,[0,R])
+int2=int(int1,p,[0,pi])
+int3=int(int2,t,[0,2*pi])
+
+%5.9c
+clear all
+syms theta varphi x y z R
+assume(R,'positive')
+t = theta; p = varphi;
+Sigma = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+We berekenen de normaal op de bol en zorgen ervoor dat die naar buiten wijst door  als eerste en  als tweede parameter te kiezen.
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+We kiezen een vectorveld waarvoor de divergentie overal 1 is, zodat we met de stelling van Gauss het volume van de bol kunnen berekenen.
+F = [0,x,0]
+divergence(F, [x,y,z])
+Volgens de stelling van Gauss is het volume van de bol gelijk aan de oppervlakintegraal van het vectorveld over de rand van de bol.
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, p, [0, pi]), t, [0, 2*pi])
+
+PM = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+
+Jacobiaan=R^2*sin(p)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+int1=int(Jacobiaan*div,R,[0,R])
+int2=int(int1,p,[0,pi])
+int3=int(int2,t,[0,2*pi])
+
+%5.9d
+clear all
+syms theta varphi x y z R
+assume(R,'positive')
+t = theta; p = varphi;
+Sigma = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+We berekenen de normaal op de bol en zorgen ervoor dat die naar buiten wijst door  als eerste en  als tweede parameter te kiezen.
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+We kiezen een vectorveld waarvoor de divergentie overal 1 is, zodat we met de stelling van Gauss het volume van de bol kunnen berekenen.
+F = [x,y,z]
+divergence(F, [x,y,z])
+Volgens de stelling van Gauss is het volume van de bol gelijk aan de oppervlakintegraal van het vectorveld over de rand van de bol.
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal = int(int(integrand, p, [0, pi]), t, [0, 2*pi])
+
+PM = R*[cos(t)*sin(p), sin(t)*sin(p), cos(p)]
+
+Jacobiaan=R^2*sin(p)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+int1=int(Jacobiaan*div,R,[0,R])
+int2=int(int1,p,[0,pi])
+int3=int(int2,t,[0,2*pi])
+
+%5.9e
+clear all
+syms x y z R s t  u v
+F = [2*x^2*y,-y^2,4*x*z^2]
+integrand=divergence(F, [x,y,z])
+int(int(int(integrand,x,[0 2]),y,[0,sqrt(9-z^2)]),z,[0 3])
+
+Sigma=[v,3*cos(t),3*sin(t)]
+normaal = -simplify(cross(diff(Sigma,v), diff(Sigma,t)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, v, [0, 2]), t, [0, pi/2])
+
+Sigma=[0,u*cos(t),u*sin(t)]
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, u, [0, 3]), t, [0, pi/2])
+
+Sigma=[2,u*cos(t),u*sin(t)]
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal3 = int(int(integrand, u, [0, 3]), t, [0, pi/2])
+
+Sigma=[v,0,t]
+normaal = simplify(cross(diff(Sigma,v), diff(Sigma,t)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal4 = int(int(integrand,v, [0, 2]), t, [0, 4])
+
+
+Sigma=[v,t,0]
+normaal = simplify(cross(diff(Sigma,v), diff(Sigma,t)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal5 = int(int(integrand, v, [0, 2]), t, [0, 3/2])
+
+
+
+
+som=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3+oppervlakintegraal4+oppervlakintegraal5
+
+
+%5.9f 
+clear all
+syms x y z u t
+F = [x,y,z]
+PM=[u*cos(t),u*sin(t),z]
+integrand=divergence(F, [x,y,z])
+integrand=subs(integrand,{x,y},{PM(1),PM(2)})
+int(int(int(u*integrand,t,[0 2*pi]),u,[0,3]),z,[0 3])
+
+Sigma=[3*cos(t),3*sin(t),z]
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,z)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, z, [0, 3]), t, [0, 2*pi])
+
+Sigma=[u*cos(t),u*sin(t),0]
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,u)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, u, [0, 3]), t, [0, 2*pi])
+
+Sigma=[u*cos(t),u*sin(t),3]
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,u)))
+G_oppervlak = subs(F, [x,y,z], Sigma)
+integrand = dot(G_oppervlak, normaal)
+oppervlakintegraal3 = -int(int(integrand, u, [0, 3]), t, [0, 2*pi])
+
+som=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3
+
+%5.9g
+clear all
+syms u v x y z a t
+PM = [u,v,a-u-v]
+F = [x,y,z]
+normaal = -cross(diff(PM,v), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, v, [0, a-u])
+int2=int(int1,u,[0 a])
+
+F = [x,y,z]
+PM = [u,v,t*(a-u-v)]
+
+term1_1=diff(PM(1),u)
+term2_1=diff(PM(1),v)
+term3_1=diff(PM(1),t)
+term1_2=diff(PM(2),u)
+term2_2=diff(PM(2),v)
+term3_2=diff(PM(2),t)
+term1_3=diff(PM(3),u)
+term2_3=diff(PM(3),v)
+term3_3=diff(PM(3),t)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+
+Jacobiaan=det(A)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+integrand=divergence(F, [x,y,z])*Jacobiaan
+integrand=subs(integrand,{x,y,z},{PM(1),PM(2),PM(3)})
+int(int(int(integrand,t,[0 1]),v, [0, a-u]),u,[0 a])
+
+%5.9h
+syms x y z
+fimplicit3(sqrt(x^(2)+y^(2))-9+z)
+axis equal 
+hold on 
+fimplicit3(x^(2)+y^(2)-z^(2)-9)
+axis equal 
+
+clear all
+syms theta t u p x y z
+p=theta
+F = [0,0,z+1]
+PM=[u*cos(t),u*sin(t),z]
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+int11=int(u*div,u,[0,9-z])
+int21=int(int11,z,[4 9])
+int31=int(int21,t,[0 2*pi])
+
+int12=int(u*div,u,[0,sqrt(z^2+9)])
+int22=int(int12,z,[0 4])
+int32=int(int22,t,[0 2*pi])
+som=int31+int32
+
+PM = [t*u*cos(p), t*u*sin(p), 9-u]
+term1_1=diff(PM(1),t)
+term2_1=diff(PM(1),p)
+term3_1=diff(PM(1),u)
+term1_2=diff(PM(2),t)
+term2_2=diff(PM(2),p)
+term3_2=diff(PM(2),u)
+term1_3=diff(PM(3),t)
+term2_3=diff(PM(3),p)
+term3_3=diff(PM(3),u)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+Jacobiaan=det(A)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+
+div=divergence(F, [x,y,z])
+%F_vol = subs(div, [x,y,z], PM)
+int1=int(Jacobiaan*div,t,[0 1])
+int2=int(int1,u,[3 5])
+int3=int(int2,p,[0,2*pi])
+%heeft geen zin: geen oppervlak nodig voor een volume te bepalen 
+
+
+Sigma = [u*cos(p), u*sin(p), 9-u]
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,u)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, p, [0, 2*pi]), u, [0, 5])
+
+
+Sigma = [u*cos(t),u*sin(t),sqrt(u^2-9)]
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand, t, [0, 2*pi]), u, [3, 5])
+
+Sigma = [u*cos(t),u*sin(t),0]
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,t)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal3 = int(int(integrand, t, [0, 2*pi]), u, [0,3])
+
+integraal=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3
+
+%5.10a
+clear all 
+syms x y z  t s
+F=[z^2-x,-x*y,3*z]
+div=divergence(F, [x,y,z])
+
+Sigma = [t,s,4-s^2]
+normaal = simplify(cross(diff(Sigma,s), diff(Sigma,t)))
+F_oppervlak = -subs(F, [x,y,z], Sigma)
+assume([t, s], 'real')
+integrand = dot(F_oppervlak, normaal)
+int1=int(integrand,t,[0,3])
+deel1=int(int1,s,[-2,2])
+%slechts één deeloppervlak 
+
+Sigma = [0,s,t*(4-s^2)]
+normaal = -simplify(cross(diff(Sigma,s), diff(Sigma,t)))
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, s], 'real')
+integrand = dot(F_oppervlak, normaal)
+int1=int(integrand,t,[0,1])
+deel2=int(int1,s,[-2,2])
+
+Sigma = [3,s,t*(4-s^2)]
+normaal = simplify(cross(diff(Sigma,s), diff(Sigma,t)))
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, s], 'real')
+integrand = dot(F_oppervlak, normaal)
+int1=int(integrand,t,[0,1])
+deel3=int(int1,s,[-2,2])
+
+Sigma = [t,s,0]
+normaal = -simplify(cross(diff(Sigma,s), diff(Sigma,t)))
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, s], 'real')
+integrand = dot(F_oppervlak, normaal)
+int1=int(integrand,t,[0,3])
+deel4=int(int1,s,[-2,2])
+
+som=deel1+deel2+deel3+deel4
+% oppervlakteintegraal 
+
+int1=int(div,z,[0 4-y^2])
+int2=int(int1,y,[-2 2])
+int3=int(int2,x,[0 3])
+
+%5.10b 
+clear all 
+syms x y z  phi theta R
+F=[2*x+3*z,-x*z-y,y^2+2*z]
+PM=R*[sin(phi)*cos(theta),sin(phi)*sin(theta),cos(phi)]
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+Jacobiaan= R^2*sin(phi)
+
+int1=int(Jacobiaan*div,R,[0 3])
+int2=int(int1,phi,[0 pi])
+int3=int(int2,theta,[0,2*pi])
+
+syms x y z  phi theta R
+F=[2*x+3*z,-x*z-y,y^2+2*z]
+Sigma = 3*[sin(phi)*cos(theta),sin(phi)*sin(theta),cos(phi)]
+Sigma= Sigma + [3,-1,2]
+normaal = simplify(cross(diff(Sigma,phi), diff(Sigma,theta)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([theta, phi], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, theta, [0, 2*pi]), phi, [0, pi])
+
+%5.10c
+clear all
+syms x y z u v t a
+F = [y*z,z*x,x*y]
+PM = [u,v,t*(a-u-v)]
+
+term1_1=diff(PM(1),u)
+term2_1=diff(PM(1),v)
+term3_1=diff(PM(1),t)
+term1_2=diff(PM(2),u)
+term2_2=diff(PM(2),v)
+term3_2=diff(PM(2),t)
+term1_3=diff(PM(3),u)
+term2_3=diff(PM(3),v)
+term3_3=diff(PM(3),t)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+
+Jacobiaan=det(A)
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+
+integrand=divergence(F, [x,y,z])*Jacobiaan
+integrand=subs(integrand,{x,y,z},{PM(1),PM(2),PM(3)})
+int(int(int(integrand,t,[0 1]),v, [0, a-u]),u,[0 a])
+
+syms x y z u v t a
+F = [y*z,z*x,x*y]
+Sigma = [u,v,a-u-v]
+normaal = simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([u,v], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand,v, [0, a-u]),u,[0 a])
+
+Sigma = [u,v,0]
+normaal = -simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([u,v], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand,v, [0, a-u]),u,[0 a])
+
+Sigma = [0,v,a-u-v]
+normaal = -simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([u,v], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal3 = int(int(integrand,v, [0, a-u]),u,[0 a])
+
+Sigma = [u,0,a-u-v]
+normaal = -simplify(cross(diff(Sigma,u), diff(Sigma,v)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([u,v], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal4 = int(int(integrand,v, [0, a-u]),u,[0 a])
+som=oppervlakintegraal1+oppervlakintegraal2+oppervlakintegraal3+oppervlakintegraal4
+
+%5.10d
+clear all 
+syms x y z  phi theta R a
+F=[x^3,y^3,z^3]
+PM=R*[sin(phi)*cos(theta),sin(phi)*sin(theta),cos(phi)]
+div=divergence(F, [x,y,z])
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+div=simplify(div)
+Jacobiaan= R^2*sin(phi)
+
+int1=int(Jacobiaan*div,R,[0 a])
+int2=int(int1,phi,[0 pi])
+int3=int(int2,theta,[0,2*pi])
+
+syms x y z a phi theta R
+F=[x^3,y^3,z^3]
+Sigma = a*[sin(phi)*cos(theta),sin(phi)*sin(theta),cos(phi)]
+normaal = simplify(cross(diff(Sigma,phi), diff(Sigma,theta)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([theta, phi], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal= int(int(integrand, theta, [0, 2*pi]), phi, [0, pi])
+
+%5.10e
+clear all
+syms x y z u v t
+F = [4*x*z,-y^2,y*z]
+
+div=divergence(F, [x,y,z])
+
+integrand=div
+int(int(int(integrand,x,[0 1]),y, [0, 1]),z,[0 1])
+%oppervlakintegraal: integreren over 6 vlakken 
+
+%5.10f
+clear all
+syms x y z u v t b a
+PM = [u*cos(t),u*sin(t),z]
+F = [x^2,y^2,z^2]
+div=divergence(F,[x,y,z])
+integrand=subs(div,{x,y,z},{PM(1),PM(2),PM(3)})
+
+integrand=subs(u*integrand,{x,y,z},{PM(1),PM(2),PM(3)})
+int(int(int(integrand,z,[0 (b/a)*u]),u,[0 a]),t, [0, 2*pi])
+
+syms x y z u v t b a
+F = [x^2,y^2,z^2]
+Sigma = [a*v*cos(t),a*v*sin(t),b*v]
+normaal = simplify(cross(diff(Sigma,t), diff(Sigma,v)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([a,b,t], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal1= int(int(integrand, t, [0, 2*pi]),v,[0 1])
+
+Sigma = [u*cos(t),u*sin(t),b]
+normaal = -simplify(cross(diff(Sigma,t), diff(Sigma,u)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([a,b,t], 'real')
+integrand = dot(F_oppervlak, normaal)
+oppervlakintegraal2= int(int(integrand, t, [0, 2*pi]),u,[0 a])
+
+som=oppervlakintegraal1+oppervlakintegraal2
+
+%5.11
+clear all
+Definitie vectorveld: :  
+syms x y 
+M(x,y) = x; 
+N(x,y) = x^2 -y;
+F = [M(x,y), N(x,y)]
+Is de vloeistof onsamendrukbaar?  
+divergence(F)
+Ja! Bijgevolg is het gerelateerde orthogonale vectorveld  irrotationeel: 
+G = [-N(x,y), M(x,y)]
+syms z
+curl([G(1),G(2),0],[x,y,z])
+Conclusie: het vectorveld  is een exact of conservatief vectorveld. 
+Er bestaat dus een potentiaalfunctie  zodat G = grad f : 
+syms h(x)
+f(x, y) = int(G(2), y) + h(x)
+voorwaarde_h = diff(f(x,y), x) == G(1);
+voorwaarde_h = simplify(voorwaarde_h)
+We integreren beide leden om  tot op een additieve constante na te bepalen. Dit geeft ook de potentiaalfunctie.
+int(lhs(voorwaarde_h)) == int(rhs(voorwaarde_h))
+h(x)   = -x^3;
+f(x,y) = subs(f(x,y))
+Ter controle: We vergelijjken het (zelf berekende) resultaat met de uitvoer van de ingebouwde MATLAB-procedure.
+g(x,y) = potential(G, [x,y])
+Stroomlijnen: 
+syms C
+stroomlijn = y == solve(g(x,y) == C, y)
+We bepalen de potentiaal (en dus de stroomlijnen) van de punten A = (1,1) en B = (2,1)
+C1 = g(1,1)
+C2 = g(2,1)
+het punt C ligt dus op dezelfde stroomlijn als A. We maken een figuur van de stroomlijnen.
+[X, Y] = meshgrid(linspace(1/2, 2, 10), linspace(-2, 2, 10));
+figure(1);clf;
+hold on
+quiver(X, Y, M(X,Y), N(X,Y), 2)
+fimplicit(g(x,y) == C1, [1/2, 2, -2, 2], 'LineWidth', 1.5)
+fimplicit(g(x,y) == C2, [1/2, 2, -2, 2], 'LineWidth', 1.5)
+scatter([1, 1, 2], [2, 1, -3/2], 'black', 'filled')
+text(1 - 0.1,1,'A')
+text(1, -1 - 0.3, 'B')
+legend({'F(x,y)', strcat('g(x,y) =   ', string(C1)), strcat('g(x,y) = ', string(C2))}, 'Location', 'south', 'NumColumns', 3)
+hold off
+We berekenen de flux doorheen het lijnstuk AB:
+syms t
+assume(t, 'real')
+lijn1 = [1+t, 1]
+integrand1 = simplify(dot(subs(G, [x,y], lijn1), diff(lijn1, t)))
+flux1 = int(integrand1, t, [0, 1])
+of met de potentiaalfunctie:
+g(2,1) - g(1,1)
+We berekenen de flux door het lijnstuk BC:
+lijn2 = [t+1, (5/3)^(t-1)]
+integrand2 = simplify(dot(subs(G, [x,y], lijn2), diff(lijn2, t)))
+flux2 = int(integrand2, t, [0, 1])
+of met de potentiaalfunctie:
+ g(3,25/9)-g(2,5/3)
+Dit is de tegengestelde flux, want C ligt op dezelfde stroomlijn als A, en de volgorde van de punten is omgewisseld.
+
+%5.12: terug te vinden in voorbereidingsoefeningen 
+
+%5.13
+clear all
+Definitie vectorveld: :  
+syms x y 
+M(x,y) = log(x)-2; 
+N(x,y) = -y/x-6*x;
+F = [M(x,y), N(x,y)]
+Is de vloeistof onsamendrukbaar?  
+divergence(F)
+Ja! Bijgevolg is het gerelateerde orthogonale vectorveld  irrotationeel: 
+G = [-N(x,y), M(x,y)]
+syms z
+curl([G(1),G(2),0],[x,y,z])
+Conclusie: het vectorveld  is een exact of conservatief vectorveld. 
+Er bestaat dus een potentiaalfunctie  zodat G = grad f : 
+syms h(x)
+f(x, y) = int(G(2), y) + h(x)
+voorwaarde_h = diff(f(x,y), x) == G(1);
+voorwaarde_h = simplify(voorwaarde_h)
+We integreren beide leden om  tot op een additieve constante na te bepalen. Dit geeft ook de potentiaalfunctie.
+int(lhs(voorwaarde_h)) == int(rhs(voorwaarde_h))
+h(x)   = -x^3;
+f(x,y) = subs(f(x,y))
+Ter controle: We vergelijjken het (zelf berekende) resultaat met de uitvoer van de ingebouwde MATLAB-procedure.
+g(x,y) = potential(G, [x,y])
+Stroomlijnen: 
+syms C
+stroomlijn = y == solve(g(x,y) == C, y)
+We bepalen de potentiaal (en dus de stroomlijnen) van de punten A = (1,1), B = (1,0), en C = (2, -3/2).
+C1 = g(1,1)
+C2 = g(1,0)
+het punt C ligt dus op dezelfde stroomlijn als A. We maken een figuur van de stroomlijnen.
+[X, Y] = meshgrid(linspace(1/2, 2, 10), linspace(-2, 2, 10));
+figure(1);clf;
+hold on
+quiver(X, Y, M(X,Y), N(X,Y), 2)
+fimplicit(g(x,y) == C1, [1/2, 2, -2, 2], 'LineWidth', 1.5)
+fimplicit(g(x,y) == C2, [1/2, 2, -2, 2], 'LineWidth', 1.5)
+scatter([1, 1, 2], [1, 0, -3/2], 'black', 'filled')
+text(1 - 0.1,1,'A')
+text(1, -1 - 0.3, 'B')
+text(2, -3/2 - 0.3, 'C')
+legend({'F(x,y)', strcat('g(x,y) =   ', string(C1)), strcat('g(x,y) = ', string(C2))}, 'Location', 'south', 'NumColumns', 3)
+hold off
+We berekenen de flux doorheen het lijnstuk AB:
+syms t
+assume(t, 'real')
+lijn1 = [1, 1-t]
+integrand1 = simplify(dot(subs(G, [x,y], lijn1), diff(lijn1, t)))
+flux1 = int(integrand1, t, [0, 1])
+of met de potentiaalfunctie:
+ g(1,0)-g(1,1)
+We berekenen de flux door het lijnstuk BC:
+lijn2 = [1/sqrt(t), 0]
+integrand2 = simplify(dot(subs(G, [x,y], lijn2), diff(lijn2, t)))
+flux2 = int(integrand2, t, [3, 1])
+of met de potentiaalfunctie:
+g(1,0) - g(1/sqrt(3),0)
+Dit is de tegengestelde flux, want C ligt op dezelfde stroomlijn als A, en de volgorde van de punten is omgewisseld.
+
+syms theta
+M(x,y) = log(x)-2; 
+N(x,y) = -y/x-6*x;
+F = [M(x,y), N(x,y)]
+G = [-N(x,y), M(x,y)]
+assume(theta, 'real')
+param2 = [0.5*cos(theta) + 1, 0.5*sin(theta) + 0.5]
+integrand2 = dot(subs(G, [x y], param2), diff(param2, theta))
+vpaintegral(integrand2, theta, [pi/2, 3*pi/2])
+
+%5.14
+clear all 
+syms x y z phi f
+F=[y,x]
+va=[0 0]
+m=1
+
+%we controleren of er sprake is van een conservatief vectorveld
+syms z
+curl([F,0],[x,y,z])
+
+%We zoeken nu kleine f
+f(x,y)=(potential(-F,[x,y]))
+
+%som van Epot en Ekin is constant door behoud van energie
+%In punt A geeft dit: 
+phi_A=0.5*m*(norm(va)^2)+subs(f,[x,y],[0 1])
+
+%punt B
+syms vb
+phi_B=0.5*m*(norm(vb)^2)+vpa(f(0.50139,1.0417))
+assume(vb>0)
+vpasolve(phi_B==phi_A,vb)
+
+%5.15
+clear all 
+syms x y z phi f
+F=[y-(3/2)*x,x]
+va=[1 0]
+m=1
+
+%we controleren of er sprake is van een conservatief vectorveld
+syms z
+curl([F,0],[x,y,z])
+
+%We zoeken nu kleine f
+f(x,y)=(potential(-F,[x,y]))
+
+%som van Epot en Ekin is constant door behoud van energie
+%In punt A geeft dit: 
+phi_A=0.5*m*(norm(va)^2)+subs(f,[x,y],[0 1])
+
+%punt B
+syms vb
+phi_B=0.5*m*(norm(vb)^2)+vpa(f(1.217712,1.194456))
+assume(vb>0)
+vpasolve(phi_B==phi_A,vb)
+
+%5.16
+clear all 
+syms x y z phi f
+F=[x+2*z,2*y+3*z,2*x+3*y+z]
+va=[1 1 1]
+m=1
+
+%we controleren of er sprake is van een conservatief vectorveld
+syms z
+curl([F],[x,y,z])
+
+%We zoeken nu kleine f
+f(x,y,z)=(potential(-F,[x,y,z]))
+
+%som van Epot en Ekin is constant door behoud van energie
+%In punt A geeft dit: 
+phi_A=0.5*m*(norm(va)^2)+subs(f,[x,y,z],[0 0 0])
+
+%punt B
+syms vb
+e_kinB=0.5*m*(norm(vb)^2)
+e_potB=vpa(f(1.640,2.096,2.255))
+phi_B=e_kinB+e_potB
+assume(vb>0)
+vpasolve(phi_B==phi_A,vb)
+
+%5.17
+clear all
+syms x y t 
+gamma = [2*cos(t)+cos(2*t),2*sin(t)-sin(2*t)]
+F=[0; x]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify((diff(gamma, t)))
+F=subs(F,x,gamma(1))
+F=subs(F,y,gamma(2))
+integrand=dot(F,d_gamma(t))
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+value= int(integrand, t, [0,2*pi])
+value_num=vpaintegral(integrand, t, [0,2*pi])
+
+%5.18
+clear all
+syms x y t 
+gamma = [(1/2)*sin(2*t),sin(t)]
+F=[0; x]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify((diff(gamma, t)))
+F=subs(F,x,gamma(1))
+F=subs(F,y,gamma(2))
+integrand=dot(F,d_gamma(t))
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+value= int(integrand, t, [0,pi])
+value_num=vpaintegral(integrand, t, [0,pi])
+
+%5.19
+%Hier moeten we niet de stelling van Stokes gebruiken, hier moeten we
+%gewoon de oppervlakintegraal over 
+clear all
+syms t  x y z s
+PM = [s, sin(t), cos(t)]
+F = [0,y*z,z^2]
+We kiezen  als eerste en  als tweede parameter en berekenen de normaalvector.
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, s, [0, 1])
+int2=int(int1,t,[-pi/2 pi/2])
+
+Oefening 5.20
+clear all
+syms u v t x y z a
+PM = [1-u-v,2*u,2*v]
+F = [x*z,x*y,3*x*z]
+F_orig=F
+assume([u v t],'positive')
+assume([u v t],'real')
+normaal = -cross(diff(PM,v), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, v, [0, 1-u])
+int2=int(int1,u,[0 1])
+
+F=F_orig
+gamma=[t,0,2-2*t]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, t, [0, 1])
+
+gamma=[1-t,2*t,0]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal2 = int(integrand2, t, [0, 1])
+
+gamma=[0,2-2*t,2*t]
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal3 = int(integrand2, t, [0, 1])
+som=lijnintegraal1+lijnintegraal2+lijnintegraal3
+
+%5.21 
+syms x y z p o R
+assume([x y z p o],'real')
+PM=[R*sin(p)*cos(o),R*sin(p)*sin(o),R*cos(p)+2]
+PM=subs(PM,R,sym(sqrt(8)))
+F=[y^2*cos(x*z),x^3*exp(y*z),-exp(-x*y*z)]
+F=curl(F,[x,y,z])
+
+normaal = cross(diff(PM,p), diff(PM,o));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, o, [0,2*pi])
+int2=int(int1,p,[0,pi-pi/4]) %bovenste helft van de bol
+%te moeilijke integraal voor MATLAB 
+
+syms x y z p o R
+assume([x y z p o],'real')
+PM=[u*cos(t),u*sin(t),sqrt(8-u^2)+2]
+F=[y^2*cos(x*z),x^3*exp(y*z),-exp(-x*y*z)]
+F=curl(F,[x,y,z])
+normaal = cross(diff(PM,u), diff(PM,t));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0,sym(sqrt(8))])
+int2=int(int1,p,[0,2*pi])
+
+syms x y z p o R t
+F=[y^2*cos(x*z),x^3*exp(y*z),-exp(-x*y*z)]
+gamma=[sqrt(8)*sin(p)*cos(t),sqrt(8)*sin(p)*sin(t),sqrt(8)*cos(p)+2]
+assume(t,'real')
+gamma=subs(gamma,p,pi-pi/4)
+F_na_gamma = subs(F, [x,y,z], gamma)
+d_gamma = diff(gamma, t)
+integrand2 = simplify(dot(F_na_gamma, d_gamma))
+lijnintegraal1 = int(integrand2, t, [0, 2*pi])
+
+syms x y z p o R u t
+assume([x y z p o],'real')
+PM=[u*sqrt(8)*sin(p)*cos(t),sqrt(8)*sin(p)*sin(t),0]
+PM=subs(PM,p,pi-pi/4)
+F=[y^2*cos(x*z),x^3*exp(y*z),-exp(-x*y*z)]
+F=curl(F,[x,y,z])
+
+normaal = cross(diff(PM,u), diff(PM,t));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0,1])
+int2=int(int1,t,[0,2*pi])
+
+%5.22
+syms x y z t s u
+F=[x^2,y*z,x]
+PM=[t,s,u*(1-t-s)]
+x_d=diff(F(1,1),x)
+y_d=diff(F(1,2),y)
+z_d=diff(F(1,3),z)
+div=x_d+y_d+z_d
+
+term1_1=diff(PM(1),t)
+term2_1=diff(PM(1),s)
+term3_1=diff(PM(1),u)
+term1_2=diff(PM(2),t)
+term2_2=diff(PM(2),s)
+term3_2=diff(PM(2),u)
+term1_3=diff(PM(3),t)
+term2_3=diff(PM(3),s)
+term3_3=diff(PM(3),u)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+
+Jacobiaan=det(A)
+
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+integrand=Jacobiaan*div
+int(int(int(integrand,t,[0 1-s]),s,[0 1]),u,[0 1])
+%int(int(int(3*z,z,[0,sqrt(1-y^2)]),x,[0 1]),y,[-1 1])
+
+syms x y z t s u
+PM = [t,s,1-t-s]
+F=[x^2,y*z,x]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1-s])
+opp1=int(int1,s,[0,1])
+
+syms x y z t s u
+PM = [t,s,0]
+F=[x^2,y*z,x]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1-s])
+opp2=int(int1,s,[0,1])
+
+PM = [0,s,1-t-s]
+F=[x^2,y*z,x]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1-s])
+opp3=int(int1,s,[0,1])
+
+PM = [t,0,1-t-s]
+F=[x^2,y*z,x]
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, t, [0,1-s])
+opp4=int(int1,s,[0,1])
+
+som=opp1+opp2+opp3+opp4
+%ok
+
+Oefening 5.23
+%op manier 1
+clear all
+syms t u x y z v r
+PM = [u, sin(t), cos(t)]
+F = [0,y*z,z^2]
+normaal = -cross(diff(PM,t), diff(PM,u));
+normaal = simplify(normaal)
+F=subs(F, x,PM(1))
+F=subs(F, y,PM(2))
+F=subs(F, z,PM(3))
+integrand=sum(scalprod(F,normaal))
+int1=int(integrand, u, [0, 1])
+int2=int(int1,t,[-pi/2 pi/2])
+
+%manier 1 geeft foute uitkomst 
+
+%op manier 2 
+F=[0;y*z;z^2]
+PM=[v,r*cos(t),r*sin(t)]
+x_d=diff(F(1,:),x)
+y_d=diff(F(2,:),y)
+z_d=diff(F(3,:),z)
+div=x_d+y_d+z_d
+
+term1_1=diff(PM(1),v)
+term2_1=diff(PM(1),r)
+term3_1=diff(PM(1),t)
+term1_2=diff(PM(2),v)
+term2_2=diff(PM(2),r)
+term3_2=diff(PM(2),t)
+term1_3=diff(PM(3),v)
+term2_3=diff(PM(3),r)
+term3_3=diff(PM(3),t)
+
+A=[term1_1,term1_2,term1_3;term1_2,term2_2,term2_3;term3_1,term3_2,term3_3]
+
+Jacobiaan=det(A)
+
+div=subs(div,x,PM(1))
+div=subs(div,y,PM(2))
+div=subs(div,z,PM(3))
+integrand=Jacobiaan*div
+int(int(int(integrand,r,[0 1]),t,[0 pi]),v,[0 1])
+int(int(int(3*z,z,[0,sqrt(1-y^2)]),x,[0 1]),y,[-1 1])
+
+%5.24 volume
+clear all
+syms theta t u p x y z
+
+F = [0,0,z^3]
+div=divergence(F, [x,y,z])
+int1=int(u*div,u,[sqrt(z^2+1) sqrt(3-z^2)])
+int2=int(int1,z,[-1 1])
+int3=int(int2,theta,[0,2*pi])
+
+
+%5.24 oppervlakte
+clear all 
+syms t p x y z 
+F = [0,0,z^3]
+Sigma = [sqrt(t^2+1)*cos(p), sqrt(t^2+1)*sin(p), t]
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = -dot(F_oppervlak, normaal)
+oppervlakintegraal1 = int(int(integrand, p, [0, 2*pi]), t, [-1,1])
+
+R=3
+
+Sigma = R*[sin(p)*cos(t),sin(p)*sin(t),cos(p)]
+normaal = simplify(cross(diff(Sigma,p), diff(Sigma,t)))
+Oppervlakteintegraal
+F_oppervlak = subs(F, [x,y,z], Sigma)
+assume([t, p], 'real')
+integrand = -dot(F_oppervlak, normaal)
+oppervlakintegraal2 = int(int(integrand,p, [acos(sym(-1/3)), acos(sym(1/3))]), t, [0, 2*pi])
+integraal=oppervlakintegraal1+oppervlakintegraal2
+integraal=simplify(expand(integraal))
+
