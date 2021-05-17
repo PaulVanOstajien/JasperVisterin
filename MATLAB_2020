@@ -1,0 +1,180 @@
+%MUPAD EXAMEN 2020
+
+%vraag 1
+%b
+clear all
+
+A = sym([0 1 0 0;1 0 3 0;0 0 0 1;2 0 2 0])
+[P,J] = eig(A)
+alpha = real(J(4,4))
+beta = imag(J(4,4))
+G = real(P(1:4,4))
+H = imag(P(1:4,4))
+
+syms t
+Y1=P(:,1)*exp(J(1,1)*t)
+Y2=P(:,2)*exp(J(2,2)*t)
+Y3 = exp(alpha*t) * (cos(beta*t) * G - sin(beta*t) * H)
+Y4 = exp(alpha*t) * (cos(beta*t) * H + sin(beta*t) * G)
+We voegen deze twee oplossingen bij elkaar in de matrixoplossing Z en berekenen Z(0).
+Z = [Y1, Y2, Y3, Y4]
+Z0 = subs(Z, t, 0)
+Dan is  .
+eAt = Z * inv(Z0)
+assume(t, 'real')
+expm(A*t)
+A
+eAt
+
+Y0 = [-2;1;0;2]
+Yp = eAt * Y0
+Yp = simplify(Yp)
+
+%c
+param1=[Yp(1,1),Yp(3,1)]
+fplot(param1(1),param1(2), [0, 5], 'linewidth', 2)
+xlabel("X_coordinate")
+ylabel("Y_coordinate")
+
+%d
+x_coor=vpa(subs(Yp(1,1),t,3))
+y_coor=vpa(subs(Yp(3,1),t,3))
+
+%vraag2
+clear all
+syms u v x y z
+Sigma = [u*cos(v), u*sin(v), 9-u^2/4] %parametrization of x, y and z
+f(x,y,z) = 2*sqrt(x^2+y^2+4) %mass function per surface area 
+fplot3(Sigma(1), Sigma(2), Sigma(3), [-pi/2, pi/2,0, 6])
+
+n = cross(diff(Sigma, u), diff(Sigma, v))
+
+assume(u, 'real')
+assume(v, 'real')
+norm_n(u, v)     = simplify(norm(n))
+f_na_Sigma(u, v) = f(Sigma(1), Sigma(2), Sigma(3))
+int_f = int(int(f_na_Sigma(u,v) * norm_n(u, v), v, [-pi/2, pi/2]), u, [0, 6])
+
+mass=int_f
+
+integrand=norm_n
+surface = int(int(integrand, v, [-pi/2, pi/2]), u, [0, 6])
+
+
+center_x= int(int(u*cos(v)*f_na_Sigma(u,v) * norm_n(u, v), v, [-pi/2, pi/2]), u, [0, 6]) / mass
+center_y= int(int(u*sin(v)*f_na_Sigma(u,v) * norm_n(u, v), v, [-pi/2, pi/2]), u, [0, 6]) / mass
+center_z= int(int((9-u^2/4)*f_na_Sigma(u,v) * norm_n(u, v), v, [-pi/2, pi/2]), u, [0, 6]) / mass
+
+syms x y u v
+
+Sigma=[6*u*cos(v), 6*u*sin(v), 0]
+n = cross(diff(Sigma, u), diff(Sigma, v))
+F=[x*z,y^2,-5]
+F=subs(F,x,Sigma(1))
+F=subs(F,y,Sigma(2))
+F=subs(F,z,Sigma(3))
+integrand=dot(F,n)
+flux2=int(int(integrand,u,[0,1]),v,[-pi/2, pi/2])
+%Flux trough projection of top parabola on xy-plane 
+%conclusion: there goes more 'virtual fluid' out of the surface rather than
+%goes inwards
+
+F=[x*z,y^2,-5]
+F=subs(F,x,Sigma(1))
+F=subs(F,y,Sigma(2))
+F=subs(F,z,Sigma(3))
+integrand=dot(F,n)
+flux1=int(int(integrand,u,[0,6]),v,[-pi/2, pi/2])
+%Flux trough top-part of parabola  
+
+%vraag3
+clear all
+
+syms x y
+f(x,y) = x^3 - 3*x^2*y + 3*x*y^2 -y^3 + 2*x^2 + 6*x*y - 3*y^2
+We berekenen de kritische punten door de partiële afgeleiden nul te stellen. De partiële afgeleiden zijn de componenten van de gradiënt van de functie en kunnen berekend worden met  gradient .
+gradf = gradient(f(x,y), [x, y])
+kritisch = solve(gradf, [x, y])
+disp([kritisch.x, kritisch.y])
+
+aantal = length(kritisch.x)
+
+De determinant van de Hessiaanmatrix wordt gegeven door:
+delta = det(hessian(f(x,y), [x,y]))
+We definiëren de tweede afgeleide van f naar x:
+fxx = diff(f(x,y),x,2)
+Voor elk kritisch punt   berekenen en tonen we de functiewaarde   , de determinant van de Hessiaanmatrix   en :  
+for i = 1 : aantal
+    p0 = [kritisch.x(i), kritisch.y(i)];
+    p0
+    f0 = f(kritisch.x(i), kritisch.y(i));
+    f0, vpa(f0,6)
+    Delta = subs(delta, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    Delta
+    f2 = subs(fxx, {x, y}, {kritisch.x(i), kritisch.y(i)});
+    f2
+    disp('______________')
+end
+Beiden punten buiten gevraagd gebied. 
+(0,0) is een zadelpunt 
+(0,-2) is een minimum 
+
+We zoeken nu de kritische punten op het lijnstuk x = 3/2 met -1 <= y <= 2:
+w = f(3/2,y)
+krit = solve(diff(w,y), y)
+%punten f(3/2,-1/2)=29/4 en f(3/2,3/2)=45/4 %levert mogelijk maximum 
+We berekenen de functiewaarde in het kritische punt en in de randpunten:
+subs(w, y, krit)
+subs(w,y,-1), subs(w,y,2)
+%f(3/2,-1)=65/8 en f(3/2,2)=83/8
+
+We zoeken ook de kritische punten op het lijnstuk y = -1 met -1/2 <= x <= 3/2:
+w = f(x,-1)
+krit = solve(diff(w,x), x)
+We berekenen de functiewaarde in het kritische punt en in de randpunten:
+subs(w, x, krit) 
+%eerste punt buiten interval 
+%tweede punt geeft mogelijk minimum
+vpa(subs(w, x, krit))
+subs(w,x,-1/2), subs(w,x, 3/2)
+
+Tenslotte zoeken we ook de kritische punten op het deel van de rechte 3x/2+y-1/4=0 waarvoor -1/2 <= x <= 3/2:
+yy = solve(3*x/2-y-1/4==0,y)
+w = f(x,yy)
+w = expand(w)
+krit = solve(diff(w,x), x)
+vpa(krit)
+We berekenen de functiewaarde in het kritische punt en in de randpunten:
+subs(w, x, krit)
+vpa(subs(w, x, krit))
+
+subs(yy,krit)
+vpa(subs(yy,krit))
+
+subs(w,x,-1/2)
+subs(w,x,3/2)
+vpa(subs(w,x,-1/2)) %levert minimum 
+
+vpa(subs(w,x,-1/2)) 
+yy=subs(yy,x,-1/2)
+%Conclusie: 
+%f(-1/2, 1) = -8.875 geeft minimum 
+f(3/2,3/2)=45/4 %levert maximum 
+
+
+Nu tekenen we niveaulijnen van de functie: een aantal willekeurige om een globaal beeld te krijgen, en ook specifieke door de gevonden kritische punten. We gebruiken hievoor het commando fcontour. De kritische punten worden weergegeven met scatter. We tekenen ook de beperking.
+syms t
+a = -1/2; b = 3/2; c = -1; d = 2;
+figure
+set(gca, 'XAxisLocation', 'origin', 'YAxisLocation', 'origin')
+hold on
+fcontour(f(x,y), [a, b, c, d], 'LevelList', [-1:0.5:6], 'LineColor', 'g')
+fcontour(f(x,y), [a, b, c, d], 'LevelList', [ kritisch.x(i), kritisch.y(i)], 'LineColor', 'm')
+scatter(kritisch.x, kritisch.y, 'fill', 'MarkerFaceColor', 'k')
+fplot(3/2,t,[-1,2],'LineWidth', 3)
+%fplot([t-1/2],[-1], [0,2],'LineWidth', 3)
+fplot(t,3*t/2-1/4,[-1/2,3/2], 'LineWidth',3)
+hold off
+axis equal
+
+fsurf(f, [a,b,c,d])
