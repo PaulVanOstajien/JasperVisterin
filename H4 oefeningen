@@ -1,0 +1,1331 @@
+%Handige truc, parametrisatie tekenen
+%in 2D
+%fplot(subs(param1(1), a, 2), subs(param1(2), a, 2), [0, 2*pi], 'linewidth', 2)
+
+%4.1e
+syms t
+int(t^2/2+1,t,[0 6])
+
+%4.2a
+clear all
+syms x y z t
+f(x,y,z) = x^2 + y^2 + z^2
+gamma = [cos(t), sin(t), t]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2), gamma(3))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, 6*pi])
+
+%oefening4.2c 
+clear all
+syms x y t
+f(x,y) = x+y
+gamma = [t,1-t] %zijde AB 
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value1= int(f_na_gamma(t) * d_gamma(t), t, [0,1])
+
+f(x,y) = x+y
+gamma = [t,0] %zijde AB 
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value2= int(f_na_gamma(t) * d_gamma(t), t, [0,1])
+
+f(x,y) = x+y
+gamma = [0,t] %zijde AB 
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value3= int(f_na_gamma(t) * d_gamma(t), t, [0,1])
+value=value1+value2+value3
+
+
+%oefening4.2d 
+clear all
+syms x y t a
+f(x,y) = y^2
+gamma = [a*(t-sin(t)),a*(1-cos(t))]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0,pi/4])
+% geeft niet direct een veelzeggend antwoord 
+
+integrand=simplify(expand(f_na_gamma(t) * d_gamma(t)))
+value= int(integrand, t, [0,pi/4])
+%bovenste deel is verkeerd
+% sqrt(1-cos x)=sqrt(2)*sin(x/2) invullen in (1-cosx)^2 geeft simpelere
+% integraal 
+
+integrand=simplify(expand(a^2*(2*axis)*(sqrt(2)*sin(t/2))^4*sin(t/2)))
+value= int(integrand, t, [0,2*pi])
+
+%oefening4.2e 
+clear all
+syms x y z t a
+f(x,y,z) = sqrt(2*y^2+z^2)
+gamma = [(a/sqrt(2))*cos(t),(a/sqrt(2))*cos(t) ,(a)*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2), gamma(3))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, 2*pi])
+vaue_2=int(sqrt(4-3*sin(t)^2)*f_na_gamma*a/2,t,[0,2*pi])
+%manueel opgelost 
+
+%oefening4.2f 
+clear all
+syms x y t a b
+f(x,y) = x*y
+gamma = [a*cos(t),b*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+ value= int(f_na_gamma(t) * d_gamma(t), t, [0,2*pi])
+ %work in progress
+
+%oefening4.2g 
+clear all
+syms x y t a 
+f(x,y) = sqrt(x^2+y^2)
+gamma = [a*(cos(t)+t*sin(t)),a*(sin(t)-t*cos(t))]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0,2*pi])
+integrand=simplify(expand(f_na_gamma(t) * d_gamma(t)))
+value= int(integrand, t, [0,2*pi])
+
+%oefening4.2h
+clear all
+syms x y t a 
+f(x,y) = x+y
+r=a*sqrt(cos(2*t))
+gamma = [r*cos(t),r*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(a,'positive')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [-pi/4,pi/4])
+integrand=simplify(expand(f_na_gamma(t) * d_gamma(t)))
+value= int(integrand, t, [-pi/4,pi/4])
+
+
+%geeft juiste antwoord weer 
+clear all
+syms t a
+integrand=sqrt(2)*(a^2)*sin(t+pi/4)
+value=int(integrand,t,[-pi/4,pi/4])
+fplot(sqrt(cos(2*t))*cos(t), sqrt(cos(2*t))*sin(t), t, [0, 2*pi] )
+
+
+%oefening4.2i
+clear all
+syms x y z t
+f(x,y,z) = y+x/y+2*y*z
+gamma = [t^2, t, 1]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2), gamma(3))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, 1])
+
+%oefening4.2j
+clear all
+syms x y z t
+f(x,y,z) = 2*x+y+z
+gamma = [5*cos(t+pi),5*sin(t+pi),0]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2), gamma(3))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, pi])
+simplify(value)
+
+%oefening4.3a
+clear all
+syms x y t
+f(x,y) = 2+x
+gamma = [cos(t),sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, 2*pi])
+massa=simplify(value)
+%MASSA BEREKEND 
+
+xx = int(gamma(1) * f_na_gamma(t) * d_gamma(t), t, [0,2*pi]) / massa
+yy = int(gamma(2) * f_na_gamma(t) * d_gamma(t), t, [0,2*pi]) / massa
+
+
+%oefening4.3b 
+clear all
+syms x y t k a
+f(x,y) = k
+gamma = [a*(t-sin(t)),a*(1-cos(t))]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(a,'positive')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, pi])
+massa=simplify(value)
+%MASSA BEREKEND 
+
+xx = int(gamma(1) * f_na_gamma(t) * d_gamma(t), t, [0,pi]) / massa
+yy = int(gamma(2) * f_na_gamma(t) * d_gamma(t), t, [0,pi]) / massa
+
+%oefening4.3c 
+clear all
+syms x y t
+f(x,y) = 2-y
+gamma = [cos(t),sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f_na_gamma(t) = f(gamma(1), gamma(2))
+f_na_gamma(t) = simplify(f_na_gamma(t))
+We integreren het product van de vorige twee resultaten.
+value= int(f_na_gamma(t) * d_gamma(t), t, [0, 2*pi])
+massa=simplify(value)
+%MASSA BEREKEND 
+
+%oef4.3d
+clear all
+syms u v t 
+Sigma = [cos(u), sin(u),t]
+We berekenen de normaalvector.
+Alpha = diff(Sigma, u)
+Beta  = diff(Sigma, t)
+n     = simplify(cross(Alpha, Beta))
+De lengte van de normaalvector moet geïntegreerd worden over een rechthoek. We gebruiken herhaalde enkelvoudige integratie om de dubbele integraal te berekenen.
+assume(u, 'real')
+assume(t > 0)
+
+integrand = simplify(norm(n))
+oppervlakte = int(int(integrand, t, [0, 2-sin(u)]), u, [0, 2*pi])
+
+%oef4.3e 
+clear all 
+syms x y
+f=sqrt(y+x^2/2)
+x_rand=2/sqrt(3)
+f_1=x^2/2
+f_2=1-x^2/4
+integrand1=subs(f,y,f_1)
+integrand2=subs(f,y,f_2)
+
+integraal1=int(integrand1,x,[-x_rand x_rand])
+integraal2=int(integrand2,x,[-x_rand x_rand])
+
+oppervlakte = integraal1+integraal2
+%foute oplossing: zie voorbereidingsoefeningen 
+
+%oef 4.3e
+%experiment dus kan fout zijn 
+clear all 
+syms x y
+f=sqrt(y+x^2/2)
+x_rand=2/sqrt(3)
+f_1=x^2/2
+f_2=1-x^2/4
+integrand=int(f,y,[f_1 f_2])
+integrand=expand(integrand)
+integrand=simplify(integrand)
+int(integrand,x,[-x_rand x_rand])
+%foute oplossing: effectiever, beide curven beschouwen en vervolgens dan
+%lijnintegraal toepassen om oppervlakte te bekomen (zie voorbereidende
+%oefeningen) 
+%evalueren over beide curven 
+
+%4.3f
+clear all
+syms x y t a
+f(x,y) = sqrt(4*a^2-3*x^2-3*y^2)
+gamma = [a*sin(2*t)*cos(t),a*sin(2*t)*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(a,'positive')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+We moeten de functie ook uitrekenen langs de kromme.
+f(x,y)=subs(f(x,y),x,gamma(1))
+f(x,y)=subs(f(x,y),y,gamma(2))
+f_na_gamma(t) = simplify(expand(f(x,y)))
+We integreren het product van de vorige twee resultaten.
+value= int(simplify(expand(f_na_gamma(t) * d_gamma(t))), t, [0, pi/2])
+massa=simplify(value)
+%MASSA BEREKEND 
+
+%4.3g
+clear all
+syms x y z t
+gamma = [cos(t),2*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+
+value= int(d_gamma(t), t, [0, 2*pi])
+vpaintegral(d_gamma(t),t,[0, 2*pi])
+
+%4.3h
+clear all
+syms x y z t
+gamma = [log(3*sin(t)+2),log(3*cos(t)+4)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(expand((norm(diff(gamma, t)))))
+
+value= int(d_gamma(t), t, [-pi/2, pi/2])
+%foute grenzen: zie voorbereiding oefeningen 
+
+%4.3i 
+clear all
+syms x y z t
+gamma = [2*(1+(1/2)*sin(2*t))*cos(t),2*(1+(1/2)*sin(2*t))*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+d_gamma(t) = simplify(norm(diff(gamma, t)))
+
+value= int(d_gamma(t), t, [0, 2*pi])
+vpaintegral(2*d_gamma(t),t,[-pi/2, pi/2])
+
+%4.4a
+clear all
+syms t u
+PM = [t,(3/8)*t^2,u]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,t])
+int_2=int(int_1,t,[0,4]) 
+
+%4.4b 
+clear all
+syms u t
+PM = [u*cos(t), u*sin(t), u^2/2]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,2])
+int_2=int(int_1,t,[0,2*pi])
+
+%4.4c
+clear all
+syms u t x y z
+x_1=(u*cos(t))/2
+y_1=(u*sin(t))/3
+z=1-(2*x^2+3*y^2)
+z=subs(z,x,x_1)
+z=subs(z,y,y_1)
+
+PM = [u*cos(t)/2, u*sin(t)/3, z]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(u,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,2*pi])
+
+%4.4d
+clear all
+syms t
+param1=[2*t*cos(t),2*t*sin(t)]
+fplot(param1(1),param1(2), [0, 2*pi], 'linewidth', 2)
+syms u t x y z r
+PM = [r*cos(t),r*sin(t), sqrt(16-r^2)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, r)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(r,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,r,[0,2*t])
+int_2=int(int_1,t,[0,pi/2])
+
+%4.4e
+clear all
+syms u t x y z
+PM = [u*cos(t), u*sin(t), u/sqrt(3)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(u,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,4*sin(t)])
+int_2=int(int_1,t,[0,pi])
+
+%4.4f
+clear all
+syms u t x y z
+PM = [t,u,t*u]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(u,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[-sqrt(1-t^2),sqrt(1-t^2)])
+int_1=simplify(expand(int_1))
+int_2=int(int_1,t,[0,1])
+%integraal is onoplosbaar: simpelere integraal nemen 
+
+%4.4f
+clear all
+syms u t x y z
+PM = [u*cos(t),u*sin(t),u^2*sin(t)*cos(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(u,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_1=simplify(expand(int_1))
+int_2=int(int_1,t,[0,2*pi])
+
+%4.4g
+clear all
+syms p o a x y z alpha
+PM = [a*sin(p)*cos(o),a*sin(p)*sin(o),a*cos(p)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(p, 'real')
+assume(o,'real')
+Alpha = diff(PM, o)
+Beta  = diff(PM, p)
+assume(p,'positive')
+assume(o,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+assume(a,'positive')
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,p,[0,alpha])
+int_2=int(int_1,o,[0,2*pi])
+int(2*pi*a^2*sin(p),p,[0 alpha])
+
+%4.4h 
+clear all
+syms x y z
+cilinder = x^2+y^2-6*y
+bol = x^2 +y^2 +z^2-36
+fimplicit3(bol)
+hold on
+fimplicit3(cilinder)
+xlim([-7,7])
+ylim([-7,7])
+zlim([-7,7])
+
+syms theta u
+cilparam=[3*cos(theta),3*sin(theta)+3,u]
+snijlijn=solve(bol==cilinder,z)
+snijlijn=subs(snijlijn,[x,y,z],cilparam)
+
+assume([theta,u],'real')
+start=snijlijn(2)
+stop=snijlijn(1)
+
+normaal=cross(diff(cilparam,theta),diff(cilparam,u))
+norm=norm(normaal)
+
+norm=simplify(norm)
+oppervlakte=int(int(norm,u,[start,stop]),theta,[0,2*pi])
+
+%4.4i
+clear all
+syms r a t x y z 
+PM = [r*cos(t),r*sin(t),r^2/a]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(r,'real')
+Alpha = diff(PM, r)
+Beta  = diff(PM, t)
+assume(t,'positive')
+assume(r,'positive')
+assume(a,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,r,[0,(a/2)*sqrt(cos(2*t))])
+int_1=simplify(expand(int_1))
+int_2=int(int_1,t,[-pi/4,pi/4])
+integrand=a^2*(2*sqrt(2)*(cos(t))^3-1)/12
+inte=int(integrand,t,[-pi/4 pi/4])
+%dit is de left van het normale antwoord, door de symmetrie moet er 2X
+%gedaan worden
+inte=expand(inte)
+
+%4.4j
+clear all
+syms a t u
+PM=[a*cos(t),a*sin(t),u]
+vec_1=diff(PM,t)
+vec_2=diff(PM,u)
+n=cross(vec_1,vec_2)
+n=norm(n)
+assume(a,'positive')
+int1=int(n,u,[0,2*a*cos(t)])
+int2=int(2*int1,t,[-pi/2 pi/2])
+
+%4.4k
+clear all
+syms a b c t s
+PM=[s*a,b*t,c-c*s-c*t]
+vec_1=diff(PM,t)
+vec_2=diff(PM,s)
+n=cross(vec_1,vec_2)
+n=norm(n)
+assume(a,'positive')
+assume(b,'positive')
+assume(c,'positive')
+int1=int(n,t,[0,1-s])
+int2=int(int1,s,[0,1])
+int2=expand(int2)
+
+%4.4l
+clear all
+syms x y z
+paraboloide = y^2+z^2-4*x
+vlak= x-3
+parabool=y^2-x
+hold off
+fimplicit3(paraboloide)
+hold on
+fimplicit3(vlak)
+hold on 
+fimplicit3(parabool)
+xlim([-7,7])
+ylim([-7,7])
+zlim([-7,7])
+syms u t a
+PM = [u^2/(4*a),u*cos(t),u*sin(t)]
+We berekaenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,2*sqrt(3)*a])
+int_2=int(int_1,t,[0,2*pi])
+
+
+%4.4m 
+clear all
+syms x y z
+paraboloide = y^2+z^2-4*x
+vlak= x-3
+parabool=y^2-x
+hold off
+fimplicit3(paraboloide)
+hold on
+fimplicit3(vlak)
+hold on 
+fimplicit3(parabool)
+xlim([-7,7])
+ylim([-7,7])
+zlim([-7,7])
+
+syms a
+paraboloide = y^2+z^2-4*x*a
+parabool=y^2-x*a
+vlak= x-3*a
+syms theta u t
+
+parparam=[x,u*cos(t),u*sin(t)]
+snijlijn_1=solve(paraboloide==parabool,x)
+snijlijn_2=solve(vlak==paraboloide,x)
+
+snijlijn=subs(snijlijn_1,[x,y,z],parparam)
+snijlijn_2=subs(snijlijn_2,[x,y,z],parparam)
+
+assume([theta,u],'real')
+start=snijlijn(2)
+stop=snijlijn(1)
+
+normaal=cross(diff(parparam,theta),diff(parparam,u))
+norm=norm(normaal)
+
+norm=simplify(norm)
+oppervlakte=int(int(norm,u,[start,stop]),theta,[0,2*pi])
+%te complex
+%verdere uitwerking hieronder
+
+clear all
+syms u t a
+PM = [u^2/(4*a),u*cos(t), u*sin(t)]
+We berekaenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,2*sqrt(3)*a])
+deel_1=int(int_1,t,[pi/3,2*pi/3])
+
+int_1=int(integrand,u,[0,2*sqrt(3)*a])
+deel_2=int(int_1,t,[-2*pi/3,-pi/3])
+tot=deel_1+deel_2
+%geeft juiste antwoord 
+
+%4.4P
+clear all
+syms x y z
+paraboloide = x^2+z^2-2+y
+kegel=y^2-x^2-z^2
+hold off
+fimplicit3(paraboloide)
+hold on
+fimplicit3(kegel)
+
+
+xlim([-7,7])
+ylim([-7,7])
+zlim([-7,7])
+
+syms u t a
+PM = [u*cos(t),u*sin(t),2-u^2]
+We berekaenen de norm van de afgeleide van de parametrisatie.
+assume(t, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,2*pi])
+
+%4.4o
+clear all
+syms u t a
+PM = [t^2/a,t,u]
+We berekaenen de norm van de afgeleide van de parametrisatie.
+assume(t,'positive')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,sqrt(3)*t])
+int_2=int(int_1,t,[0,sqrt(3)*a])
+int_2=simplify(expand(int_2))
+%dezelfde oppervlakte is ook terug te vinden aan de negatieve y-kant
+uitkomst=2*int_2
+%het invullen van x<=3*a in de x vergelijking geeft
+% -sqrt(3)*a <= t <= sqrt(3)*a --> dubbele oppervlakte
+
+%4.4n
+clear all 
+syms u t a
+assume(u,'real')
+assume(a,'real')
+assume(t,'real')
+PM = [u,a*cos(t),a*sin(t)]
+We berekaenen de norm van de afgeleide van de parametrisatie.
+assume(t,'positive')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n     = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,sqrt(2*a^2-2*a^2*cos(t))])
+int_2=int(int_1,t,[0,pi])
+int_2=simplify(expand(int_2))
+
+%4.5a
+clear all
+syms t s x y z
+PM = [0,t,s]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_1=int2
+
+syms v u x y z
+PM = [1,t,s]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_2=int2
+
+syms v u x y z
+PM = [t,0,s]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_3=int2
+
+syms v u x y z
+PM = [t,1,s]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_4=int2
+
+syms v u x y z
+PM = [t,s,0]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_5=int2
+
+syms v u x y z
+PM = [t,s,1]
+f(x,y,z)=x+y+z
+
+normaal = cross(diff(PM,t), diff(PM,s));
+normaal = simplify(normaal)
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+normaal=norm(normaal)
+integrand=normaal*f(x,y,z)
+integrand=simplify(expand(integrand))
+int1=int(integrand, t, [0,1])
+int2=int(int1,s,[0,1])
+deel_6=int2
+totaal=deel_1+deel_2+deel_3+deel_4+deel_5+deel_6
+
+%4.5b
+syms u v x y z
+f(x,y,z)=sqrt(x^2+y^2+1)
+PM=[u*cos(v),u*sin(v),v]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, v)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,v,[0,2*pi]) 
+
+%4.5c
+syms t s x y z
+f(x,y,z)=x
+PM=[t,s,t^2+s]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, t)
+Beta  = diff(PM, s)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,t,[0,1])
+int_2=int(int_1,s,[-1,1]) 
+
+%4.5d
+syms a u v x y z
+f(x,y,z)=sqrt(x^2+y^2)
+PM=[a*sin(u)*cos(v),a*sin(u)*sin(v),a*cos(u)]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+assume(a,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, v)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,pi/2])
+int_2=int(int_1,v,[0,pi/2]) 
+
+%4.5e
+syms u v x y z
+f(x,y,z)=x^2+y^2
+PM=[u*cos(v),u*sin(v),sqrt(3)*u]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, v)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,sqrt(3)])
+int_2=int(int_1,v,[0,2*pi]) 
+
+%4.5f
+syms u v x y z
+f(x,y,z)=x*y
+PM=[t*u,t,1-t]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,1]) 
+deel1=int_2
+
+PM=[t,t,(1-t)*u]
+f(x,y,z)=x*y
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,1]) 
+deel2=int_2
+
+PM=[t*u,0,(1-t)]
+f(x,y,z)=x*y
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,1]) 
+deel3=int_2
+
+PM=[t,t*u,0]
+f(x,y,z)=x*y
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,1]) 
+deel4=int_2
+
+totaal=deel1+deel2+deel3+deel4
+
+%4.5g 
+syms u v x y z
+f(x,y,z)=exp(x+y+z)
+PM=[1+u,v,v]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, v)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,v,[0,1]) 
+
+%4.5h
+syms u v x y z
+f(x,y,z)=x^2+y^2+z^2
+PM=[u+t,u,t]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,1]) 
+
+%4.5i
+syms u v x y z
+f(x,y,z)=x^2*y^2+y^2*z^2+z^2*x^2
+PM=[u*cos(t),u*sin(t),u]
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(v, 'real')
+assume(u,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,2*pi]) 
+
+%4.6a
+In oefening 4.6.a zijn er 2 parametrisaties mogelijk: een eenvoudige param met ingewikkelde grenzen (1), en een moeilijkere param met eenvoudige grenzen (2). Ik vermeld ze hier allebei:
+(1) x=u*cos(t)/sqrt*(2), y=u*sin(t)/sqrt(3), z=1-u^2 met 0<=t<=2*pi en 0<=u<=1/sqrt(2+sin^2(t))
+(2) x=u*cos(t)/2, y=u*sin(t)/3, z=1-u^2*cos^2(t)/2-u^2*sin^2(t)/3 (=1-u^2/3-u^2*cos^2(t)/6) met 0<=t<=2*pi en 0<=u<=1
+Met beide parametrisaties kan de gemiddelde waarde gevonden worden. Probeer ze allebei eens uit om de hoeveelheid rekenwerk te vergelijken.
+Let op: zeker met de eerste keuze is het belangrijk voldoende keer 'simplify' te gebruiken, bijna na elke rekenstap, ook na het berekenen van de eerste stap in de dubbele integraal.
+syms u t x y z
+f(x,y,z)=6*x^2+3*y^2+z
+PM=[u*cos(t)/sqrt(2),u*sin(t)/sqrt(3),1-u^2]
+%cilinder=4*x^2+9*y^2==1
+%cilinder=subs(cilinder,x,PM(1))
+%cilinder=subs(cilinder,y,PM(2))
+%grens=solve(cilinder,u)
+
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+f(x,y,z)=simplify(expand(f(x,y,z)))
+
+assume(t, 'positive')
+assume(u,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+n=simplify(expand(n))
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1/sqrt(2+sin(t)^2)])
+int_1=simplify(expand(int_1))
+int_2=int(int_1,t,[0,2*pi]) 
+int_2=simplify(expand(int_2))
+Nu berekenen we de oppervlakte om de gemiddelde waarde te bekomen 
+PM=[u*cos(t)/sqrt(2),u*sin(t)/sqrt(3),1-u^2]
+assume(t, 'positive')
+assume(u,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+n=simplify(expand(n))
+integrand=n
+integrand=simplify(expand(integrand))
+surface_area1=int(integrand,u,[0,1/sqrt(2+sin(t)^2)])
+surface_area1=simplify(expand(surface_area1))
+surface_area2=int(surface_area1,t,[0,2*pi]) 
+surface_area2=simplify(expand(surface_area2))
+gemiddelde_waarde1=int_2/surface_area2
+
+syms u t x y z
+PM=[(u/2)*cos(t),(u/3)*sin(t),1-u^2/3-u^2*(cos(t))^2/6]
+f(x,y,z)=6*x^2+3*y^2+z
+f(x,y,z)=subs(f(x,y,z),x,PM(1))
+f(x,y,z)=subs(f(x,y,z),y,PM(2))
+f(x,y,z)=subs(f(x,y,z),z,PM(3))
+
+assume(t, 'positive')
+assume(u,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=f(x,y,z)*n
+integrand=simplify(expand(integrand))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,1])
+int_2=int(int_1,t,[0,2*pi]) 
+Nu berekenen we de oppervlakte om de gemiddelde waarde te bekomen 
+assume(t, 'positive')
+assume(u,'positive')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=n
+integrand=simplify(expand(integrand))
+surface_area1=int(integrand,u,[0,1])
+surface_area2=int(surface_area1,t,[0,2*pi]) 
+gemiddelde_waarde2=int_2/surface_area2
+
+%4.6b
+clear all
+syms rho u v
+Sigma = [u*cos(v),(1/2)*u^2,u*sin(v)]
+n(u, v) = cross(diff(Sigma,u), diff(Sigma, v));
+n(u, v) = simplify(n(u, v))
+assume(u, 'real')
+assume(v, 'real')
+norm_n(u, v) = simplify(norm(n(u, v)))
+massa = int(int(rho * norm_n(u, v), u, [0,1]), v, [0, pi])
+Om symmetrieredenen zijn de x-coördinaat en de y-coördinaat van het massacentrum 0. De z-coördinaat vinden we als volgt.
+centrum_x = int(int(rho * Sigma(1) * norm_n(u, v), u, [0,1]),v, [0, pi]) / massa
+centrum_y = int(int(rho * Sigma(2) * norm_n(u, v), u, [0,1]),v, [0, pi]) / massa
+centrum_z = int(int(rho * Sigma(3) * norm_n(u, v), u, [0,1]),v, [0, pi]) / massa
+
+%4.6c
+%oude parametrisatie van 4.4g te gebruiken 
+clear all
+syms p o a x y z alpha rho
+PM = [a*sin(p)*cos(o),a*sin(p)*sin(o),a*cos(p)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(p, 'real')
+assume(o,'real')
+Alpha = diff(PM, o)
+Beta  = diff(PM, p)
+assume(p,'positive')
+assume(o,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+assume(a,'positive')
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,p,[0,alpha])
+int_2=int(int_1,o,[0,2*pi])
+surface_area=int(2*pi*a^2*sin(p),p,[0 alpha])
+massa=rho*surface_area
+centrum_x = int(int(rho * PM(1) * integrand,o,[0,2*pi]),p,[0,alpha])/(massa)
+centrum_y = int(int(rho * PM(2) * integrand,o,[0,2*pi]),p,[0,alpha])/massa
+centrum_z = int(int(rho * PM(3) * integrand,o,[0,2*pi]),p,[0,alpha])/massa
+centrum_z=-int(2*pi*a^3*rho*sin(p)*cos(p)/(2*a^2*rho*pi*(cos(alpha)-1)),p,[0 alpha])
+
+%4.6d
+clear all
+syms u t rho
+PM = [u*cos(t),u*sin(t),2-u^2]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(u, 'real')
+assume(t,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(u,'positive')
+assume(t,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,sqrt(2)])
+int_2=int(int_1,t,[0,2*pi])
+surface_area=int_2
+massa=rho*surface_area
+centrum_x = int(int(rho * PM(1) * integrand,u,[0,sqrt(2)]),t,[0,2*pi])/(massa)
+centrum_y = int(int(rho * PM(2) * integrand,u,[0,sqrt(2)]),t,[0,2*pi])/massa
+centrum_z = int(int(rho * PM(3) * integrand,u,[0,sqrt(2)]),t,[0,2*pi])/massa
+
+%4.6e
+clear all
+syms u t rho
+PM = [u,1/4*(8-3*u)*cos(t),1/4*(8-3*u)*sin(t)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(u, 'real')
+assume(t,'real')
+Alpha = diff(PM, u)
+Beta  = diff(PM, t)
+assume(u,'positive')
+assume(t,'positive')
+n= simplify(expand(cross(Alpha, Beta)))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,2])
+int_2=int(int_1,t,[0,2*pi])
+surface_area=int_2
+massa=rho*surface_area
+centrum_x = int(int(rho * PM(1) * integrand,u,[0,2]),t,[0,2*pi])/(massa)
+centrum_y = int(int(rho * PM(2) * integrand,u,[0,2]),t,[0,2*pi])/massa
+centrum_z = int(int(rho * PM(3) * integrand,u,[0,2]),t,[0,2*pi])/massa
+
+%4.6f
+clear all
+syms t u rho
+PM = [cos(t),sin(t)+1,u]
+We berekenen de massa van het deel S:
+n = cross(diff(PM, t), diff(PM, u))
+n = simplify(n)
+assume(u > 0)
+assume(t, 'real')
+norm_n = simplify(norm(n))
+int_1=int(rho*norm_n,u,[0 2])
+massa=int(int_1,t,[-pi 0])
+centrum_x = int(int(rho * PM(1) * norm_n ,u,[0,2]),t,[-pi 0])/(massa)
+centrum_y = int(int(rho * PM(2) * norm_n ,u,[0,2]),t,[-pi 0])/massa
+centrum_z = int(int(rho * PM(3) * norm_n ,u,[0,2]),t,[-pi 0])/massa
+
+Oefening 4.6 (f)
+clear all
+Merk op dat de doorsnede van de halve cilinder met het xz-vlak de onderste helft van een cirkel is met centrum (0,y,1) en straal 1. 
+Parametrisatie + visualisatie: 
+syms u v
+param = [cos(u), v, sin(u) + 1]
+fsurf(param(1), param(2), param(3), [pi, 2*pi, 0, 2])
+xlabel('x');ylabel('y');zlabel('z');
+axis equal
+Normaalvector en lengte van de normaalvector: 
+n = cross(diff(param, u), diff(param, v))
+assume([u,v], 'real')
+N  = simplify(norm(n))
+Totale massa, met  de constante massadichtheid .
+syms rho
+massa = int(int(rho * N, v, [0, 2]), u, [pi, 2*pi])
+Coördinaten van het massacentrum.
+mx = int(int(rho * param(1) * N, v, [0, 2]), u, [pi, 2*pi]) / massa
+my = int(int(rho * param(2) * N, v, [0, 2]), u, [pi, 2*pi]) / massa
+mz = int(int(rho * param(3) * N, v, [0, 2]), u, [pi, 2*pi]) / massa
+Alternatief: met een vector-integraal.
+massacentrum = int(int(rho * param * N, v, [0, 2]), u, [pi, 2*pi]) / massa
+
+%4.7
+clear all
+syms u v R r
+PM = [cos(u)*(R+r*cos(v)),sin(u)*(R+r*cos(v)),r*sin(v)]
+We berekenen de norm van de afgeleide van de parametrisatie.
+assume(v, 'real')
+assume(u,'real')
+assume(v, 'positive')
+assume(u,'positive')
+assume(r>0)
+assume(R>0)
+assume(R>r)
+Alpha = diff(PM, u)
+Beta  = diff(PM, v)
+n = simplify(cross(Alpha, Beta))
+n=norm(n)
+integrand=simplify(expand(n))
+We integreren het product van de vorige twee resultaten.
+int_1=int(integrand,u,[0,2*pi])
+int_1=simplify(expand(int_1))
+int_2=int(int_1,v,[0,2*pi]) 
+int(2*pi*(R+r*cos(v))*r,v,[0 2*pi])
+
+%extraatje van de chef 
+clear all
+syms u v t 
+Sigma = [u*cos(t), u*sin(t),u^2]
+We berekenen de normaalvector.
+Alpha = diff(Sigma, u)
+Beta  = diff(Sigma, t)
+n     = simplify(cross(Alpha, Beta))
+
+assume(u, 'real')
+assume(t > 0)
+
+integrand = simplify(norm(n))
+%oppervlakte = int(int(integrand,u, [0, sin(t)-cos(t)]), t, [pi/4, pi+pi/4])
+%integraal kan niet analytisch uitgerekend worden 
+vpaintegral(vpaintegral(integrand,u, [0, sin(t)-cos(t)]), t, [pi/4, pi+pi/4])
+
+%extraatje van de chef bis
+clear all 
+syms x y z r theta
+f(x,y)=x^2-y^2
+afg_x=diff(f(x,y),x)
+afg_y=diff(f(x,y),y)
+integrand=sqrt(1+afg_x^2+afg_y^2)
+transf=[r*cos(theta),r*sin(theta)]
+integrand=subs(subs(integrand,x,transf(1)),y,transf(2))
+
+deel1=int(integrand*r,r,[0,1])
+deel2=int(deel1,theta,[0 2*pi])
+
+%andere PM
+syms u v t 
+Sigma = [u,v,u^2-v^2]
+We berekenen de normaalvector.
+Alpha = diff(Sigma, u)
+Beta  = diff(Sigma, v)
+n     = simplify(cross(Alpha, Beta))
+
+assume(u, 'real')
+assume(v, 'real')
+
+integrand = simplify(norm(n))
+oppervlakte = int(int(integrand,v, [-sqrt(1-u^2),sqrt(1-u^2)]),u, [-1,1])
+vpaintegral(int(integrand,v, [-sqrt(1-u^2),sqrt(1-u^2)]),u, [-1,1])
+vpa(deel2)
