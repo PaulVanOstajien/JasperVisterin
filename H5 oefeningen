@@ -466,19 +466,22 @@ b = diff(param, t)
 integrand = a(:).' * b(:)
 p1=int(integrand,t,[0,2*pi])
 
-param=[sin(t),cos(t)]
+param=[sin(t),cos(t)] %omgekeerd overlopen van de cirkel
 a = subs(F, {x, y}, {param(1), param(2)})
 b = diff(param, t)
 integrand = a(:).' * b(:)
 p2=int(integrand,t,[0,2*pi])
 total=p1+p2
-%lijnintegraal berekend 
+%lijnintegraal berekend
+
 M=F(1,1)
 N=F(1,2)
 integrand2 = diff(N,x) - diff(M,y)
 integrand2=subs(integrand2, {x, y}, {r*cos(t), r*sin(t)})
 int(int(r*integrand2, t, [0,2*pi]), r, [1,3])
+
 %Jacobiaan moet nog toegevoegd worden! 
+%ander assenstelsel: schaalfactor toevoegen (bij oppintegralen --> normaalvector) 
 %Bij transformatie: Jacobiaan toepassen!! 
 
 %5.4c
@@ -533,6 +536,7 @@ N=F(1,2)
 integrand2 = diff(N,x) - diff(M,y)
 int1=int(integrand2,x,[0 2])
 int2=int(int1,y,[0 2])
+%Zoals bij Analyse I: integreren over een vierkantje 
 
 %5.4d
 syms x y z r t
@@ -544,7 +548,9 @@ b = diff(param, t)
 integrand = a(:).' * b(:)
 p1=int(integrand,t,[pi/4,pi/4+pi])
 
-param=[sin(t),cos(t)]
+param=[sin(t),cos(t)] 
+%omgekeerd doorlopen van de cirkel 
+
 a = subs(F, {x, y}, {param(1), param(2)})
 b = diff(param, t)
 integrand = a(:).' * b(:)
@@ -596,7 +602,7 @@ integral=simplify(integral)
 clear all
 syms t x y z r R
 gamma = [R*cos(t),R*sin(t)]
-F(x,y) = [-x,-y]
+F(x,y) = [-x,-y] %omgekeerd vectorveld (-N,M), ook wel orthogonaal vectorveld 
 
 F_na_gamma(t) = F(gamma(1),gamma(2))
 d_gamma(t) = diff(gamma,t)
@@ -662,7 +668,9 @@ clear all
 syms x y t a
 gamma = a*[(cos(t))^3,(sin(t))^3]
 F=[0; x]
+
 We berekenen de norm van de afgeleide van de parametrisatie.
+
 assume(t, 'real')
 assume(a,'positive')
 d_gamma(t) = simplify((diff(gamma, t)))
@@ -670,13 +678,16 @@ F=subs(F,x,gamma(1))
 F=subs(F,y,gamma(2))
 integrand=dot(F,d_gamma(t))
 integrand=simplify(expand(integrand))
+
 We integreren het product van de vorige twee resultaten.
+
 value= int(4*integrand, t, [0,pi/2])
 value_num=vpaintegral(integrand, t, [0,2*pi])
 
 %5.5cIII
 %als je een vectorveld kiest zodanig dat de norm in de dubbele integraal 1
 %wordt, zal dit een oppervlak geven 
+%hetzelfde voor volume (zie stelling van Stokes) 
 
 syms x y t 
 gamma = [exp(cos(t)),exp(sin(t))]
@@ -693,6 +704,7 @@ value_num=vpaintegral(integrand, t, [0,2*pi])
 
 %5.6a: met de hand 
 %5.6b: met de hand
+
 %5.6c 
 Oppervlakintegraal
 clear all
@@ -1004,9 +1016,13 @@ clear all
 syms u v R theta x y z
 Sigma = R*[sin(theta)*cos(u), sin(theta)*sin(u), cos(theta)]
 F = [2*y,3*x,-z^2]
+
 We berekenen de normaal op het oppervlak.
+
 normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
+
 Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+
 rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
 assume([u, v], 'real')
 integrand = dot(rotor_oppervlak, normaal)
@@ -1015,9 +1031,12 @@ Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en pro
 gamma=[R*cos(theta),R*sin(theta),0]
 F_na_gamma = subs(F, [x,y,z], gamma)
 d_gamma = diff(gamma, theta)
+
 assume(theta, 'real')
+
 integrand2 = simplify(dot(F_na_gamma, d_gamma))
 lijnintegraal = int(integrand2, theta, [0, 2*pi])
+
 %3 substitueren in de uitdrukking geeft de gevraagde uitdrukking
 
 %5.7d
@@ -1055,12 +1074,14 @@ assume([u, v], 'real')
 integrand = dot(rotor_oppervlak, normaal)
 oppervlakintegraal = int(int(integrand, u, [0, 2*pi]), v, [3, 5])
 Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+
 gamma=[3*cos(-theta),0,3*sin(-theta)]
 F_na_gamma = subs(F, [x,y,z], gamma)
 d_gamma = diff(gamma, theta)
 assume(theta, 'real')
 integrand2 = simplify(dot(F_na_gamma, d_gamma))
 lijnintegraal1 = int(integrand2, theta, [0, 2*pi])
+%omgekeerd doorlopen van het opp 
 
 gamma=[5*cos(theta),4,5*sin(theta)]
 F_na_gamma = subs(F, [x,y,z], gamma)
@@ -1076,13 +1097,18 @@ clear all
 syms u v R theta x y z
 Sigma = [u*cos(theta), u*sin(theta), 1-cos(theta)]
 F = [y-z,z-x,x-y]
+
 We berekenen de normaal op het oppervlak.
+
 normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
+
 Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+
 rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
 assume([u, theta], 'real')
 integrand = dot(rotor_oppervlak, normaal)
 oppervlakintegraal = int(int(integrand, u, [0, 1]), theta, [0, 2*pi])
+
 Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
 gamma=[cos(theta),sin(theta),1-cos(theta)]
 F_na_gamma = subs(F, [x,y,z], gamma)
@@ -1097,15 +1123,21 @@ clear all
 syms u v R theta x y z
 Sigma = [u*cos(theta), u*sin(theta), 1-cos(theta)]
 %gesloten kromme
+
 F = [x^2-y*z,y^2-z*x,z^2-x*y]
 We berekenen de normaal op het oppervlak.
+
 normaal = simplify(cross(diff(Sigma,u), diff(Sigma,theta)))
 Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+
 rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
 assume([u, theta], 'real')
 integrand = dot(rotor_oppervlak, normaal)
+
 oppervlakintegraal = int(int(integrand, u, [0, 1]), theta, [0, 2*pi])
+
 Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+
 gamma=[cos(theta),sin(theta),1-cos(theta)]
 F_na_gamma = subs(F, [x,y,z], gamma)
 d_gamma = diff(gamma, theta)
@@ -1199,14 +1231,20 @@ clear all
 syms u v R theta x y z a t phi
 Sigma = [u*cos(theta),u*sin(theta),2-u]
 F = [x-z,x^3+y*z,-3*x*y^2]
+
 We berekenen de normaal op het oppervlak.
+
 normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,u)))
+
 Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
+
 rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
 assume([u, theta], 'real')
 integrand = dot(rotor_oppervlak, normaal)
 oppervlakintegraal = int(int(integrand, u, [0, 2]),theta , [0, 2*pi])
+
 Voor de lijnintegraal rekenen we eerst het vectorveld uit langs de kromme en projecteren we dat op de raaklijn.
+
 syms a
 gamma=[2*cos(theta),2*sin(theta),0]
 F_na_gamma = subs(F, [x,y,z], gamma)
@@ -1220,7 +1258,9 @@ clear all
 syms u v R theta x y z a t phi
 Sigma = [a*cos(theta),a*sin(theta),t]
 F = [2*y*z,-x-3*y+2,x^2+z]
+
 We berekenen de normaal op het oppervlak.
+
 normaal = simplify(cross(diff(Sigma,theta), diff(Sigma,t)))
 Deze wijst naar onder, wat niet overeenstemt met de oriëntatie van de rand van het oppervlak. Berekenen we de oppervlakintegraal en de lijnintegraal over de rand, dan zien we dat deze, op het teken na, dezelfde zijn en er dus bij conforme oriëntatie van de rand van het oppervlak wel voldaan is aan de stelling van Stokes.
 rotor_oppervlak = subs(curl(F, [x,y,z]), [x,y,z], Sigma)
@@ -2197,7 +2237,6 @@ div=subs(div,y,PM(2))
 div=subs(div,z,PM(3))
 integrand=Jacobiaan*div
 int(int(int(integrand,t,[0 1-s]),s,[0 1]),u,[0 1])
-%int(int(int(3*z,z,[0,sqrt(1-y^2)]),x,[0 1]),y,[-1 1])
 
 syms x y z t s u
 PM = [t,s,1-t-s]
